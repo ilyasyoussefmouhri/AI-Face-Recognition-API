@@ -1,3 +1,5 @@
+# FastAPI main entrypoint
+
 def main():
     # main function
     pass

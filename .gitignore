@@ -1,0 +1,9 @@
+# Virtual Envirenments
+.env
+.venv
+
+# Data
+data/
+
+# Local tests
+local_test_client.py
