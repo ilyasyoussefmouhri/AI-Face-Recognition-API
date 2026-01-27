@@ -11,10 +11,11 @@ app.include_router(health.router)
 app.include_router(recognize.router)
 app.include_router(register.router)
 def main():
+    from app.db.base import engine, Base
+    from app.db import models
 
-
-    pass
-
+    Base.metadata.create_all(bind=engine)
+    print("Tables created successfully!")
 
 if __name__ == '__main__':
     main()

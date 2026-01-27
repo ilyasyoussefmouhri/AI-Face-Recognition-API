@@ -1,0 +1,5 @@
+
+sqlalchemy
+pydantic-settings
+pydantic
+psycopg[binary]
