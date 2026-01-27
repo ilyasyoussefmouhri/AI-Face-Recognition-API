@@ -47,7 +47,7 @@ face-recognition-api/
 │   │   │   ├── register.py
 │   │   │   ├── recognize.py
 │   │   │   └── health.py
-│   │   └── dependencies.py
+│   │   └── deps.py          # Dependencies 
 │   │
 │   ├── core/
 │   │   ├── config.py        # env, settings
