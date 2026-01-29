@@ -11,8 +11,8 @@ app.include_router(health.router)
 app.include_router(recognize.router)
 app.include_router(register.router)
 def main():
-    from app.db.base import engine, Base
-    from app.db import models
+    from app.db.base import engine
+    from app.db.models import Base
 
     Base.metadata.create_all(bind=engine)
     print("Tables created successfully!")
