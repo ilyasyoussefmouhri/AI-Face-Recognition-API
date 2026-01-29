@@ -7,3 +7,6 @@ data/
 
 # Local tests
 local_test_client.py
+
+# IDE
+.idea
