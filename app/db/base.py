@@ -1,12 +1,9 @@
-from sqlalchemy import create_engine
-from app.core.config import Settings
 
+from sqlalchemy.orm import DeclarativeBase
 
-# Load DB URL from env variable
-settings = Settings()
-engine = create_engine(
-        str(settings.DATABASE_URL),
-        pool_pre_ping=True
-        )
+class Base(DeclarativeBase):
+    pass
 
-
+# Import all models here for Alembic
+from app.db.models import User
+from app.db.models import Face
