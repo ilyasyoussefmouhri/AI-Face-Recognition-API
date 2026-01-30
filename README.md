@@ -150,3 +150,38 @@ app/
 ---
 
 > This README will evolve as the project matures.
+
+---
+
+## Current Status / Progress
+- FastAPI application skeleton is set up with modular routing across `api`, `services`, `db`, and `core`.
+- PostgreSQL 18 is installed, running, and verified via systemd and `psql`.
+- Dedicated database and application user are created.
+- Database access is configured using SQLAlchemy; connection URL validated for the psycopg driver.
+- Environment-based configuration is in place via Pydantic Settings and `.env`.
+- Alembic is initialized at the project root (migrations planned, not yet written).
+- Face detection/embedding/recognition logic is not implemented yet—API-first scaffolding only.
+
+## Why These Technologies (Concise)
+- **FastAPI**: Clear dependency injection and automatic OpenAPI docs; good for production REST services.
+- **PostgreSQL 18**: Stable relational store with future headroom for vector search extensions.
+- **SQLAlchemy**: Keeps persistence concerns separate and explicit; portable, well-supported with Postgres.
+- **Alembic**: Versioned schema migrations to evolve safely; kept at repo root to avoid app coupling.
+- **Pydantic Settings + .env**: Environment-driven config to keep secrets out of code and support per-environment overrides.
+
+## What I Learned So Far (≈10 hours)
+- Wiring FastAPI routes and dependencies to keep endpoints thin and testable.
+- Creating and validating PostgreSQL roles/databases; confirming service health via systemd and `psql`.
+- Building and validating SQLAlchemy engine/session configuration for PostgreSQL with psycopg DSNs.
+- Using Pydantic Settings to drive configuration from environment variables and `.env`.
+- Alembic initialization strategy and migration planning (versioned, root-scoped).
+- Separation of concerns: API layer vs. services vs. persistence.
+
+## Next Steps (from roadmap_and_milestones.md)
+- Author initial Alembic migrations for the current schema and run them against PostgreSQL.
+- Harden health checks and basic integration coverage between API and DB.
+- Add robust image ingestion: multipart uploads, validation, preprocessing.
+- Integrate a face detector (e.g., MTCNN/RetinaFace) with bounding box extraction and single-face enforcement.
+- Implement embedding extraction via pretrained models (ArcFace/FaceNet), normalization, and storage in PostgreSQL.
+- Build `/recognize` with threshold logic and clear responses.
+- Add logging, exception hierarchy, and pytest coverage for engineering polish.
