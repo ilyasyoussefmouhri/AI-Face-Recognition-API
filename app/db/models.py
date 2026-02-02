@@ -10,23 +10,21 @@ from app.db.base import Base
 class Face(Base):
     __tablename__ = "faces"
 
-    face_id = Column(UUID(as_uuid=True), primary_key=True, default=lambda: uuid.uuid4())
-    embeddings = Column(ARRAY(Float), nullable=False)
+    face_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.user_id"), nullable=False)
+    embedding = Column(ARRAY(Float), nullable=False)
 
-    # Relationship back to User
-    user: Mapped["User"] = relationship("User", back_populates="face", uselist=False)
-
-    @classmethod
-    def normalize_embeddings(cls, embeddings):
-        return normalize_embedding(embeddings)
+    user: Mapped["User"] = relationship("User", back_populates="faces")
 
 
 class User(Base):
     __tablename__ = "users"
 
-    user_id = Column(UUID(as_uuid=True), primary_key=True, default=lambda: uuid.uuid4())
+    user_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     name = Column(String, nullable=False)
-    face_id = Column(UUID(as_uuid=True), ForeignKey("faces.face_id"), nullable=False, unique=True)
 
-    # Relationship to Face (one-to-one, User owns the FK)
-    face: Mapped["Face"] = relationship("Face", back_populates="user")
+    faces: Mapped[list["Face"]] = relationship(
+        "Face",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
