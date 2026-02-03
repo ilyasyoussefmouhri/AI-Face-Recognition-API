@@ -2,7 +2,6 @@
 from sqlalchemy import Column, String, Float, ARRAY, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, relationship
-from app.models.embedder import normalize_embedding
 import uuid
 from app.db.base import Base
 
@@ -12,7 +11,7 @@ class Face(Base):
 
     face_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.user_id"), nullable=False)
-    embedding = Column(ARRAY(Float), nullable=False)
+    embedding = Column(ARRAY(Float), nullable=False) # Embedding stored as float array, will later change to Vector(512)
 
     user: Mapped["User"] = relationship("User", back_populates="faces")
 
