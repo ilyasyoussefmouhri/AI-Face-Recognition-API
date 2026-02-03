@@ -9,4 +9,4 @@ data/
 local_test_client.py
 
 # IDE
-.idea
+.idea/
