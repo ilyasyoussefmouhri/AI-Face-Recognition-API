@@ -17,3 +17,5 @@ signatures = {
             b'MM\x00\x2a',  # Big-endian
         ),
     }
+# file length limit
+MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB

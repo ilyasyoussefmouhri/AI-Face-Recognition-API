@@ -1,28 +1,28 @@
-from typing import BinaryIO, Optional, Tuple
+from typing import BinaryIO
 from app.core.security import signatures
 from app.core.logs import logger
 
-def validate_image(img: BinaryIO) -> Tuple[bool, Optional[str]]:
+
+def validate_image(img: BinaryIO) -> bool:  # Returns format directly
+    """Validate image format.
+
+    Raises:
+        ValueError: If image format is invalid or unsupported
+    """
     header = img.read(16)
     img.seek(0)
-    # Edge case for empty/too small file
-    if len(header) < 4:  # Minimum for any valid image
-        logger.error('Image is too small')
-        raise ValueError('Image is too small')
-        return False, None
 
-    # WEBP requires checking TWO locations
+    if len(header) < 4:
+        raise ValueError('Image file is too small')
+
     if len(header) >= 12 and header.startswith(b'RIFF') and header[8:12] == b'WEBP':
         logger.info('WebP image detected')
-        return True, 'webp'
-
+        return True
 
     for format_name, sigs in signatures.items():
         for sig in sigs:
             if header.startswith(sig):
                 logger.info(f'{format_name} image detected')
-                return True, format_name
-    logger.error('Unsupported image format')
-    raise ValueError('Unsupported image format')
-    return False, None
+                return True
 
+    raise ValueError('Unsupported image format')
