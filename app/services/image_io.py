@@ -17,10 +17,6 @@ async def decode_image(
     """
     Decode an uploaded image file that has already been validated.
 
-    Note: Assumes file has already been validated for:
-    - File size (via chunked upload)
-    - File type (via magic number validation)
-
     Args:
         file: File-like object with async read() method
         max_dimensions: Maximum (width, height) tuple
@@ -102,7 +98,7 @@ def load_image(img: Image.Image) -> np.asarray:
    try:
         # Discard the Alpha channel if it exists and ensure 3-channel RGB
         img = img.convert("RGB")
-        img_array = np.asarray(img, dtype="float32")
+        img_array = np.asarray(img, dtype="uint8")
         # Validation
         if img_array.size == 0:
             raise ImageProcessingError("Conversion resulted in empty array")
