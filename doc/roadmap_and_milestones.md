@@ -44,16 +44,15 @@ Goal: Internship-grade, production-oriented ML API
 ## Phase 3 – Face Detection Module (Weeks 4–5)
 
 ### Goals
-- Explicit face detection layer
+- Face detection layer
 
 ### Tasks
 - Integrate MTCNN or RetinaFace
-- Bounding box extraction
-- Face cropping
+- Extract embeddings and confidence scores
 - Unit tests
 
 ### Deliverables
-✅ Detector abstraction  
+✅ Detector works 
 ✅ Single-face enforcement
 
 ---

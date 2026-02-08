@@ -4,6 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from pathlib import Path
 from typing import ClassVar
 from dataclasses import dataclass
+from enum import Enum
 
 class Settings(BaseSettings):
     # This automatically looks for DATABASE_URL in .env
@@ -28,10 +29,26 @@ class Settings(BaseSettings):
     ENV_FILE: ClassVar[Path] = PROJECT_ROOT / ".env"
     model_config = SettingsConfigDict(env_file=ENV_FILE, extra="ignore")
 
+# Custom Exceptions
+class NoFaceDetectedError(Exception):
+    """Raised when no face is detected in the image."""
+    pass
+
+
+class MultipleFacesDetectedError(Exception):
+    """Raised when multiple faces are detected in the image."""
+    def __init__(self, num_faces: int):
+        self.num_faces = num_faces
+        super().__init__(f"Expected 1 face, but detected {num_faces} faces")
+
 class ImageProcessingError(Exception):
     """Custom exception for image processing errors."""
     pass
 
+# Enum for device selection
+class Device(str, Enum):
+    CPU = "CPU"
+    GPU = "GPU"
 
 
 @dataclass

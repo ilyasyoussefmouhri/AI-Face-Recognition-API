@@ -7,3 +7,4 @@ psycopg[binary]==3.3.2
 numpy==2.4.1
 alembic==1.18.2
 uvicorn==0.40.0
+insightface

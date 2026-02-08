@@ -23,10 +23,10 @@ def main():
         user = User(name="Dummy User")
 
         face = Face(
-            embeddings=[0.1, 0.2, 0.3],
+            embedding=[0.1, 0.2, 0.3],
         )
         # Explicitly link from the owning side (User holds the FK).
-        user.face = face
+        user.faces.append(face)
 
         session.add(user)
         session.add(face)
