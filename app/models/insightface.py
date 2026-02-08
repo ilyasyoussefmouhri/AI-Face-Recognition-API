@@ -6,6 +6,7 @@ import numpy as np
 from insightface.app import FaceAnalysis
 from app.schemas.detection import FaceEmbedding
 from app.core.config import NoFaceDetectedError, MultipleFacesDetectedError, Device
+from app.core.logs import logger
 
 
 
@@ -47,23 +48,28 @@ class InsightFaceEmbedder:
         """
         # Input validation
         if not isinstance(img_array, np.ndarray):
+            logger.error("Input must be a numpy array")
             raise ValueError("Input must be a numpy array")
         if img_array.ndim != 3 or img_array.shape[2] != 3:
+            logger.error(f"Input image must have 3 channels (H, W, 3), got shape {img_array.shape}")
             raise ValueError(f"Input image must have 3 channels (H, W, 3), got shape {img_array.shape}")
 
-        # Detect faces and extract embeddings
+        # Detect faces and extract embedding
         faces = self.app.get(img_array)
+        logger.info(f"Detecting faces in image with InsightFace {self.model_name} model...")
 
         # Handle edge cases: no face or multiple faces = error
         if len(faces) == 0:
+            logger.error("No face detected in the provided image")
             raise NoFaceDetectedError("No face detected in the provided image")
 
         if len(faces) > 1:
+            logger.error(f"Multiple faces detected in the provided image: {len(faces)}")
             raise MultipleFacesDetectedError(num_faces=len(faces))
 
         # Extract the single face
         face = faces[0]
-
+        logger.info(f"Face detected with embedding of shape {face.embedding.shape}")
         return FaceEmbedding(
             embedding=face.embedding,
             detection_score=float(face.det_score)

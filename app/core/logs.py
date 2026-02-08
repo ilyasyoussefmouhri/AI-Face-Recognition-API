@@ -38,7 +38,7 @@ if not logger.handlers:
     formatter = logging.Formatter(fmt=fmt, datefmt=datefmt)
 
     file_handler = RotatingFileHandler(str(LOG_FILE), maxBytes=10 * 1024 * 1024, backupCount=5, encoding="utf-8")
-    file_handler.setLevel(logging.INFO)
+    file_handler.setLevel(LOG_LEVEL)
     file_handler.setFormatter(formatter)
 
     console_handler = logging.StreamHandler()
@@ -48,5 +48,5 @@ if not logger.handlers:
     logger.addHandler(file_handler)
     logger.addHandler(console_handler)
 
-logger.setLevel(logging.INFO)
+logger.setLevel(LOG_LEVEL)
 logger.propagate = False

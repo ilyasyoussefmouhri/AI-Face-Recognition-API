@@ -1,19 +1,18 @@
-from fastapi import APIRouter, UploadFile, File
+from fastapi import APIRouter, UploadFile, Form
 from fastapi.params import Depends
 from sqlalchemy.orm import Session
-from app.api.deps import get_db, valid_content_length
+from app.api.deps import get_db, valid_content_length, get_embedder
+from app.services.registration import register_user
+from app.models.insightface import InsightFaceEmbedder
+
 
 router = APIRouter()
+@router.post("/register")
+async def register(
+    file: UploadFile = Depends(valid_content_length),
+    name: str = Form(...),
+    db: Session = Depends(get_db),
+    embedder: InsightFaceEmbedder = Depends(get_embedder)
+):
 
-@router.post("/register", tags=["register"])
-def register(
-        file: UploadFile = Depends(valid_content_length),
-        name: str = File(...),
-        db : Session = Depends(get_db)
-    ):
-
-
-    return {
-        "Endpoint": "Register",
-        "filename": file.filename,
-        }
+    return register_user(file, name, db, embedder)

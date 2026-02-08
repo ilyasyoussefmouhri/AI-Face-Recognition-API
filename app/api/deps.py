@@ -2,6 +2,21 @@
 from app.db.session import SessionLocal
 from fastapi import UploadFile, HTTPException, status
 from app.core.security import MAX_FILE_SIZE
+from app.models.insightface import InsightFaceEmbedder
+from app.core.config import Device
+
+# Loads embedder model once at startup
+_embedder_instance = None
+
+def get_embedder() -> InsightFaceEmbedder:
+    global _embedder_instance
+    if _embedder_instance is None:
+        _embedder_instance = InsightFaceEmbedder(
+            model_name='buffalo_l',
+            device=Device.CPU
+        )
+    return _embedder_instance
+
 
 # Database session dependency
 def get_db():
@@ -10,6 +25,7 @@ def get_db():
         yield db
     finally:
         db.close()
+
 #  App level size limiting dependency
 async def valid_content_length(file: UploadFile):
     # Read the file in chunks to count actual bytes

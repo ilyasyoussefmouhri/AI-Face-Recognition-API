@@ -9,7 +9,7 @@ from app.core.config import ImageConfig, ImageProcessingError
 Image.MAX_IMAGE_PIXELS = ImageConfig().max_image_pixels * 2
 
 
-async def decode_image(
+def decode_image(
         file,
         max_dimensions: tuple[int, int] = None,
         allowed_formats: Set[str] = None,
@@ -36,12 +36,15 @@ async def decode_image(
     verify_format = ImageConfig().verify_format
     try:
         # Read the already-validated file
-        bytes_data = await file.read()
+        bytes_data = file.read()
 
         if not bytes_data:
+            logger.error("Empty file data received")
             raise ImageProcessingError("Empty file data received")
+        logger.debug(f"Read {len(bytes_data)} bytes from file")
 
         # Decode image
+        logger.debug("Decoding image...")
         stream = io.BytesIO(bytes_data)
         img = Image.open(stream)
 
@@ -64,6 +67,7 @@ async def decode_image(
 
         # Validate dimensions
         if img.width > max_dimensions[0] or img.height > max_dimensions[1]:
+            logger.error(f"Image dimensions exceed maximum {max_dimensions}")
             raise ImageProcessingError(
                 f"Image dimensions ({img.width}x{img.height}) exceed "
                 f"maximum {max_dimensions}"
@@ -87,9 +91,6 @@ async def decode_image(
         logger.error(f"Failed to decode image: {type(e).__name__}: {e}", exc_info=True)
         raise ImageProcessingError(f"Failed to decode image: {str(e)}") from e
 
-    finally:
-       file.close()
-
 
 
 
@@ -98,15 +99,15 @@ def load_image(img: Image.Image) -> np.asarray:
    try:
         # Discard the Alpha channel if it exists and ensure 3-channel RGB
         img_rgb = img.convert("RGB")
-        # Convert to BGR
-        img_bgr = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2BGR)
         # Convert to NumPy array
-        img_array = np.asarray(img_bgr, dtype="uint8")
+        img_array = np.asarray(img_rgb, dtype="uint8")
+        # Convert to BGR
+        img_bgr = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
         # Validation
-        if img_array.size == 0:
+        if img_bgr.size == 0:
             raise ImageProcessingError("Conversion resulted in empty array")
-        logger.debug(f"Converted image to array: shape={img_array.shape}, dtype={img_array.dtype}")
-        return img_array
+        logger.debug(f"Converted image to array: shape={img_bgr.shape}, dtype={img_bgr.dtype}")
+        return img_bgr
    except ImageProcessingError:
        raise
    except Exception as e:

@@ -4,7 +4,7 @@ from alembic import context
 
 from app.db.session import settings
 from app.db.base import Base
-from app.db import base  # ensure models are imported
+from app.db.models import User, Face
 
 config = context.config
 

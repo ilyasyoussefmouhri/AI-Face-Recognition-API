@@ -1,0 +1,9 @@
+2026-02-08 04:55:05 [DEBUG] validation.py:12 - validate_image() - Reading image format
+2026-02-08 04:55:05 [DEBUG] validation.py:27 - validate_image() - jpeg image detected
+2026-02-08 04:55:05 [DEBUG] preprocessing.py:44 - decode_image() - Read 93392 bytes from file
+2026-02-08 04:55:05 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
+2026-02-08 04:55:05 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 1280x1280, mode=RGB, size=93392 bytes
+2026-02-08 04:55:05 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(1280, 1280, 3), dtype=uint8
+2026-02-08 04:55:06 [INFO] insightface.py:59 - embed() - Detecting faces in image with InsightFace buffalo_l model...
+2026-02-08 04:55:06 [INFO] insightface.py:72 - embed() - Face detected with embedding of shape (512,)
+2026-02-08 04:55:06 [INFO] registration.py:56 - register_user() - User ilyas registered successfully.
