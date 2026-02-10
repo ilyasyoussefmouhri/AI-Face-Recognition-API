@@ -31,7 +31,12 @@ def recognize_user(
     try:
         # Step 1: Validate the file
         validate_image(file.file)
+    except ValueError as e:
+        logger.error(f"Invalid image format: {e}")
+        raise HTTPException(status_code=422, detail=str(e))
 
+
+    try:
         # Step 2: Decode image into PIL image
         image_pil = decode_image(file.file)
 
@@ -73,11 +78,11 @@ def recognize_user(
             return RecognizeResponse(
                 match=True,
                 user_id=best_match.user_id,
-                similarity=best_similarity
+                similarity=min(1.0, max(-1.0, best_similarity))
             )
         else:
             logger.info(f"No match found (best similarity: {best_similarity:.3f})")
-            return RecognizeResponse(user_id=None, similarity=best_similarity, match=False)
+            return RecognizeResponse(user_id=None, similarity=min(1.0, max(-1.0, best_similarity)), match=False)
 
     except (ImageProcessingError, NoFaceDetectedError, MultipleFacesDetectedError) as e:
         logger.error(f"Detection failed: {str(e)}")

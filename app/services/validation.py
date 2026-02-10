@@ -1,7 +1,6 @@
 from typing import BinaryIO
-from app.core.security import signatures
 from app.core.logs import logger
-
+from app.core.config import settings
 
 def validate_image(img: BinaryIO) -> bool:  # Returns format directly
     """Validate image format.
@@ -21,7 +20,7 @@ def validate_image(img: BinaryIO) -> bool:  # Returns format directly
         logger.debug('WebP image detected')
         return True
 
-    for format_name, sigs in signatures.items():
+    for format_name, sigs in settings.SIGNATURES.items():
         for sig in sigs:
             if header.startswith(sig):
                 logger.debug(f'{format_name} image detected')

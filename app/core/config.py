@@ -5,6 +5,8 @@ from pathlib import Path
 from typing import ClassVar
 from dataclasses import dataclass
 from enum import Enum
+from app.core.logs import logger
+import json
 
 class Settings(BaseSettings):
     # This automatically looks for DATABASE_URL in .env
@@ -24,6 +26,33 @@ class Settings(BaseSettings):
         elif url.startswith("postgresql://"):
             return url.replace("postgresql://", "postgresql+psycopg://", 1)
         return url
+
+    SIGNATURES_JSON : dict = Field(
+        ...,
+        description="Magical numbers of allowed file types"
+    )
+
+    @field_validator("SIGNATURES_JSON", mode="after")
+    @classmethod
+    def parse_signatures(cls, v: str | dict) -> dict[str, tuple[bytes, ...]]:
+        """Convert JSON hex strings to bytes tuples."""
+        try:
+            parsed = v if isinstance(v, dict) else json.loads(v)
+            return {
+                file_type: tuple(bytes.fromhex(sig) for sig in signatures)
+                for file_type, signatures in parsed.items()
+            }
+        except (json.JSONDecodeError, ValueError, TypeError) as e:
+            logger.error(f"Failed to parse SIGNATURES: {e}")
+            raise ValueError(f"Invalid SIGNATURES format: {e}")
+
+    @property
+    def SIGNATURES(self) -> dict[str, tuple[bytes, ...]]:
+        """Access parsed signatures"""
+        return self.SIGNATURES_JSON
+
+
+    MAX_FILE_SIZE : int = Field(default=10485760, description="Maximum file size in bytes")
 
     PROJECT_ROOT: ClassVar[Path] = Path(__file__).resolve().parents[2]
     ENV_FILE: ClassVar[Path] = PROJECT_ROOT / ".env"
@@ -60,7 +89,8 @@ class ImageConfig:
 
 
 # Usage
+settings = Settings()
+
 if __name__ == "__main__":
     # Only print when running this module directly (avoids noisy imports in servers/tests)
-    settings = Settings()
     print(settings.DATABASE_URL)

@@ -1,10 +1,9 @@
 # FastAPI dependency injection
 from app.db.session import SessionLocal
 from fastapi import UploadFile, HTTPException, status
-from app.core.security import MAX_FILE_SIZE
 from app.models.insightface import InsightFaceEmbedder
 from app.models.matcher import InsightFaceMatcher
-from app.core.config import Device
+from app.core.config import Device, settings
 from app.core.logs import logger
 
 
@@ -51,7 +50,7 @@ async def valid_content_length(file: UploadFile):
     real_size = 0
     for chunk in iter(lambda: file.file.read(1024 * 64), b''):
         real_size += len(chunk)
-        if real_size > MAX_FILE_SIZE:
+        if real_size > settings.MAX_FILE_SIZE:
             raise HTTPException(
                 status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
                 detail="File too large"

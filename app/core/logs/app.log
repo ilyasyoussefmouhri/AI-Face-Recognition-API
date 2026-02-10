@@ -1,74 +1,399 @@
-2026-02-10 02:36:55 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
-2026-02-10 02:36:55 [DEBUG] validation.py:12 - validate_image() - Reading image format
-2026-02-10 02:36:55 [DEBUG] validation.py:27 - validate_image() - jpeg image detected
-2026-02-10 02:36:55 [DEBUG] preprocessing.py:44 - decode_image() - Read 93392 bytes from file
-2026-02-10 02:36:55 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
-2026-02-10 02:36:55 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 1280x1280, mode=RGB, size=93392 bytes
-2026-02-10 02:36:55 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(1280, 1280, 3), dtype=uint8
-2026-02-10 02:36:55 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
-2026-02-10 02:36:57 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
-2026-02-10 02:36:57 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
-2026-02-10 02:36:57 [INFO] registration.py:47 - register_user() - Registering user Ilyas youssef Mouhri...
-2026-02-10 02:36:57 [INFO] registration.py:50 - register_user() - User object created
-2026-02-10 02:36:57 [INFO] registration.py:57 - register_user() - Face object created
-2026-02-10 02:36:57 [INFO] registration.py:64 - register_user() - User Ilyas youssef Mouhri registered successfully with ID a165cd07-26d5-4a65-b3e9-5f3f7e323528
-2026-02-10 03:10:03 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
-2026-02-10 03:10:03 [DEBUG] validation.py:12 - validate_image() - Reading image format
-2026-02-10 03:10:03 [DEBUG] validation.py:27 - validate_image() - jpeg image detected
-2026-02-10 03:10:03 [DEBUG] preprocessing.py:44 - decode_image() - Read 93392 bytes from file
-2026-02-10 03:10:03 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
-2026-02-10 03:10:03 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 1280x1280, mode=RGB, size=93392 bytes
-2026-02-10 03:10:03 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(1280, 1280, 3), dtype=uint8
-2026-02-10 03:10:03 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
-2026-02-10 03:10:05 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
-2026-02-10 03:10:05 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
-2026-02-10 03:10:05 [INFO] recognition.py:46 - recognize_user() - Recognizing user from uploaded image...
-2026-02-10 03:10:05 [INFO] recognition.py:70 - recognize_user() - User recognized: Ilyas youssef Mouhri (similarity: 1.000)
-2026-02-10 03:11:54 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
-2026-02-10 03:11:54 [DEBUG] validation.py:12 - validate_image() - Reading image format
-2026-02-10 03:11:54 [DEBUG] validation.py:27 - validate_image() - jpeg image detected
-2026-02-10 03:11:54 [DEBUG] preprocessing.py:44 - decode_image() - Read 93392 bytes from file
-2026-02-10 03:11:54 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
-2026-02-10 03:11:54 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 1280x1280, mode=RGB, size=93392 bytes
-2026-02-10 03:11:54 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(1280, 1280, 3), dtype=uint8
-2026-02-10 03:11:54 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
-2026-02-10 03:11:56 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
-2026-02-10 03:11:56 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
-2026-02-10 03:11:56 [INFO] recognition.py:46 - recognize_user() - Recognizing user from uploaded image...
-2026-02-10 03:11:56 [INFO] recognition.py:70 - recognize_user() - User recognized: Ilyas youssef Mouhri (similarity: 1.000)
-2026-02-10 03:13:05 [DEBUG] validation.py:12 - validate_image() - Reading image format
-2026-02-10 03:13:05 [DEBUG] validation.py:27 - validate_image() - jpeg image detected
-2026-02-10 03:13:05 [DEBUG] preprocessing.py:44 - decode_image() - Read 107092 bytes from file
-2026-02-10 03:13:05 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
-2026-02-10 03:13:05 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 800x800, mode=RGB, size=107092 bytes
-2026-02-10 03:13:05 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(800, 800, 3), dtype=uint8
-2026-02-10 03:13:05 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
-2026-02-10 03:13:05 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
-2026-02-10 03:13:05 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
-2026-02-10 03:13:05 [INFO] recognition.py:46 - recognize_user() - Recognizing user from uploaded image...
-2026-02-10 03:13:05 [INFO] recognition.py:80 - recognize_user() - No match found (best similarity: 0.157)
-2026-02-10 10:22:46 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
-2026-02-10 10:22:46 [DEBUG] validation.py:12 - validate_image() - Reading image format
-2026-02-10 10:22:46 [DEBUG] validation.py:27 - validate_image() - jpeg image detected
-2026-02-10 10:22:46 [DEBUG] preprocessing.py:44 - decode_image() - Read 107092 bytes from file
-2026-02-10 10:22:46 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
-2026-02-10 10:22:46 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 800x800, mode=RGB, size=107092 bytes
-2026-02-10 10:22:46 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(800, 800, 3), dtype=uint8
-2026-02-10 10:22:46 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
-2026-02-10 10:22:49 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
-2026-02-10 10:22:49 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
-2026-02-10 10:22:49 [INFO] registration.py:47 - register_user() - Registering user rayane mousleh...
-2026-02-10 10:22:49 [INFO] registration.py:50 - register_user() - User object created
-2026-02-10 10:22:49 [INFO] registration.py:57 - register_user() - Face object created
-2026-02-10 10:22:49 [INFO] registration.py:64 - register_user() - User rayane mousleh registered successfully with ID b2d2798e-2b24-4fdb-87d8-1c26169a5f27
-2026-02-10 10:23:29 [DEBUG] validation.py:12 - validate_image() - Reading image format
-2026-02-10 10:23:29 [DEBUG] validation.py:27 - validate_image() - jpeg image detected
-2026-02-10 10:23:29 [DEBUG] preprocessing.py:44 - decode_image() - Read 107092 bytes from file
-2026-02-10 10:23:29 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
-2026-02-10 10:23:29 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 800x800, mode=RGB, size=107092 bytes
-2026-02-10 10:23:29 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(800, 800, 3), dtype=uint8
-2026-02-10 10:23:29 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
-2026-02-10 10:23:30 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
-2026-02-10 10:23:30 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
-2026-02-10 10:23:30 [INFO] recognition.py:46 - recognize_user() - Recognizing user from uploaded image...
-2026-02-10 10:23:30 [INFO] recognition.py:71 - recognize_user() - User recognized: rayane mousleh (similarity: 1.000)
+2026-02-10 11:55:22 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 11:55:22 [DEBUG] validation.py:11 - validate_image() - Reading image format
+2026-02-10 11:55:22 [DEBUG] validation.py:26 - validate_image() - JPEG image detected
+2026-02-10 11:55:22 [DEBUG] preprocessing.py:44 - decode_image() - Read 93392 bytes from file
+2026-02-10 11:55:22 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
+2026-02-10 11:55:22 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 1280x1280, mode=RGB, size=93392 bytes
+2026-02-10 11:55:22 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(1280, 1280, 3), dtype=uint8
+2026-02-10 11:55:22 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 11:55:24 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 11:55:24 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 11:55:24 [INFO] recognition.py:46 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 11:55:24 [INFO] recognition.py:71 - recognize_user() - User recognized: Ilyas youssef Mouhri (similarity: 1.000)
+2026-02-10 12:10:56 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:56 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:56 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:56 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:56 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:10:56 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:10:56 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:10:56 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:10:56 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:10:56 [ERROR] insightface.py:71 - embed() - Multiple faces detected in the provided image: 2
+2026-02-10 12:10:56 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:56 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:56 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:56 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:10:56 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:10:56 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:56 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:56 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:10:56 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:10:56 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:10:56 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:10:56 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:56 [ERROR] insightface.py:58 - embed() - Input image must have 3 channels (H, W, 3), got shape (480, 640)
+2026-02-10 12:10:56 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:10:56 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:56 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:10:56 [ERROR] insightface.py:67 - embed() - No face detected in the provided image
+2026-02-10 12:10:56 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:10:56 [ERROR] insightface.py:67 - embed() - No face detected in the provided image
+2026-02-10 12:10:56 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:56 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:10:56 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:10:56 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:10:58 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:58 [INFO] recognition.py:46 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:10:58 [WARNING] recognition.py:52 - recognize_user() - No faces in database
+2026-02-10 12:10:58 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:58 [ERROR] recognition.py:83 - recognize_user() - Detection failed: Expected 1 face, but detected 2 faces
+2026-02-10 12:10:58 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:58 [ERROR] recognition.py:91 - recognize_user() - Unexpected error during recognition: ValueError: Unsupported image format
+Traceback (most recent call last):
+  File "/home/ilyasyoussefmouhri/Projects/AI Face Recognition/app/services/recognition.py", line 33, in recognize_user
+    validate_image(file.file)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/usr/lib64/python3.14/unittest/mock.py", line 1175, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/unittest/mock.py", line 1179, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/unittest/mock.py", line 1234, in _execute_mock_call
+    raise effect
+ValueError: Unsupported image format
+2026-02-10 12:10:59 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:59 [ERROR] recognition.py:83 - recognize_user() - Detection failed: Failed to decode image
+2026-02-10 12:10:59 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:10:59 [INFO] recognition.py:46 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:10:59 [ERROR] recognition.py:87 - recognize_user() - Database error during recognition: Database connection failed
+Traceback (most recent call last):
+  File "/home/ilyasyoussefmouhri/Projects/AI Face Recognition/app/services/recognition.py", line 49, in recognize_user
+    faces = db.query(Face).join(User).all()
+            ~~~~~~~~^^^^^^
+  File "/usr/lib64/python3.14/unittest/mock.py", line 1175, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/unittest/mock.py", line 1179, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/unittest/mock.py", line 1234, in _execute_mock_call
+    raise effect
+sqlalchemy.exc.SQLAlchemyError: Database connection failed
+2026-02-10 12:11:04 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on GPU
+2026-02-10 12:11:06 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:06 [INFO] recognition.py:46 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:11:06 [INFO] recognition.py:71 - recognize_user() - User recognized: <Mock name='Bob.name' id='140199583523104'> Jones (similarity: 1.000)
+2026-02-10 12:11:12 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:15 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:15 [ERROR] insightface.py:55 - embed() - Input must be a numpy array
+2026-02-10 12:11:18 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:18 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:18 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:18 [ERROR] deps.py:42 - get_db() - Database error: 1 validation error:
+  {'type': 'missing', 'loc': ('body', 'file'), 'msg': 'Field required', 'input': None}
+
+  File "/home/ilyasyoussefmouhri/Projects/AI Face Recognition/app/api/routes/recognize.py", line 11, in recognize
+    POST /recognize
+2026-02-10 12:11:18 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:18 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:18 [ERROR] recognition.py:83 - recognize_user() - Detection failed: No face detected
+2026-02-10 12:11:20 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:20 [INFO] recognition.py:46 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:11:20 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on GPU
+2026-02-10 12:11:20 [INFO] recognition.py:71 - recognize_user() - User recognized: John Doe (similarity: 1.000)
+2026-02-10 12:11:21 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:21 [ERROR] deps.py:42 - get_db() - Database error: 422: No face detected in the provided image
+2026-02-10 12:11:21 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:21 [INFO] recognition.py:46 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:11:21 [INFO] recognition.py:79 - recognize_user() - No match found (best similarity: -0.028)
+2026-02-10 12:11:21 [ERROR] recognition.py:91 - recognize_user() - Unexpected error during recognition: ValidationError: 1 validation error for RecognizeResponse
+similarity
+  Input should be greater than or equal to 0 [type=greater_than_equal, input_value=-0.0280016977339983, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.12/v/greater_than_equal
+Traceback (most recent call last):
+  File "/home/ilyasyoussefmouhri/Projects/AI Face Recognition/app/services/recognition.py", line 80, in recognize_user
+    return RecognizeResponse(user_id=None, similarity=best_similarity, match=False)
+  File "/home/ilyasyoussefmouhri/Projects/AI Face Recognition/.venv/lib64/python3.14/site-packages/pydantic/main.py", line 250, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for RecognizeResponse
+similarity
+  Input should be greater than or equal to 0 [type=greater_than_equal, input_value=-0.0280016977339983, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.12/v/greater_than_equal
+2026-02-10 12:11:22 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_sc' initialized on CPU
+2026-02-10 12:11:24 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:25 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:25 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:11:26 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:26 [ERROR] deps.py:42 - get_db() - Database error: 500: Database error occurred
+2026-02-10 12:11:27 [ERROR] insightface.py:67 - embed() - No face detected in the provided image
+2026-02-10 12:11:28 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:11:28 [ERROR] deps.py:42 - get_db() - Database error: 422: Expected 1 face, but detected 2 faces
+2026-02-10 12:11:30 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on GPU
+2026-02-10 12:14:45 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:45 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:14:45 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:45 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:45 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:45 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:14:45 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:14:45 [ERROR] insightface.py:71 - embed() - Multiple faces detected in the provided image: 2
+2026-02-10 12:14:45 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:14:45 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:45 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:45 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:14:45 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:14:45 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:14:45 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:14:45 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:45 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:45 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:14:45 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:45 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:14:45 [ERROR] insightface.py:55 - embed() - Input must be a numpy array
+2026-02-10 12:14:45 [ERROR] insightface.py:67 - embed() - No face detected in the provided image
+2026-02-10 12:14:45 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:14:45 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:45 [ERROR] insightface.py:58 - embed() - Input image must have 3 channels (H, W, 3), got shape (480, 640)
+2026-02-10 12:14:45 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:45 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:14:45 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:14:45 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:14:46 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:46 [INFO] recognition.py:51 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:14:46 [WARNING] recognition.py:57 - recognize_user() - No faces in database
+2026-02-10 12:14:46 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:46 [ERROR] recognition.py:88 - recognize_user() - Detection failed: Expected 1 face, but detected 2 faces
+2026-02-10 12:14:46 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:46 [ERROR] recognition.py:35 - recognize_user() - Invalid image format: Unsupported image format
+2026-02-10 12:14:47 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:47 [ERROR] recognition.py:88 - recognize_user() - Detection failed: Failed to decode image
+2026-02-10 12:14:47 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:14:47 [INFO] recognition.py:51 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:14:47 [ERROR] recognition.py:92 - recognize_user() - Database error during recognition: Database connection failed
+Traceback (most recent call last):
+  File "/home/ilyasyoussefmouhri/Projects/AI Face Recognition/app/services/recognition.py", line 54, in recognize_user
+    faces = db.query(Face).join(User).all()
+            ~~~~~~~~^^^^^^
+  File "/usr/lib64/python3.14/unittest/mock.py", line 1175, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/unittest/mock.py", line 1179, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/unittest/mock.py", line 1234, in _execute_mock_call
+    raise effect
+sqlalchemy.exc.SQLAlchemyError: Database connection failed
+2026-02-10 12:14:52 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on GPU
+2026-02-10 12:14:59 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on GPU
+2026-02-10 12:15:01 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_sc' initialized on CPU
+2026-02-10 12:15:03 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:03 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:05 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:05 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:05 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:05 [INFO] recognition.py:51 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:15:05 [INFO] recognition.py:84 - recognize_user() - No match found (best similarity: -0.009)
+2026-02-10 12:15:05 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:05 [ERROR] deps.py:42 - get_db() - Database error: 1 validation error:
+  {'type': 'missing', 'loc': ('body', 'file'), 'msg': 'Field required', 'input': None}
+
+  File "/home/ilyasyoussefmouhri/Projects/AI Face Recognition/app/api/routes/recognize.py", line 11, in recognize
+    POST /recognize
+2026-02-10 12:15:05 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:05 [ERROR] recognition.py:88 - recognize_user() - Detection failed: No face detected
+2026-02-10 12:15:05 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:06 [ERROR] deps.py:42 - get_db() - Database error: 422: No face detected in the provided image
+2026-02-10 12:15:06 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:06 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:06 [INFO] recognition.py:51 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:15:06 [INFO] recognition.py:76 - recognize_user() - User recognized: <Mock name='Bob.name' id='140570286003200'> Jones (similarity: 1.000)
+2026-02-10 12:15:06 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:15:06 [ERROR] insightface.py:67 - embed() - No face detected in the provided image
+2026-02-10 12:15:06 [ERROR] recognition.py:96 - recognize_user() - Unexpected error during recognition: ValidationError: 1 validation error for RecognizeResponse
+similarity
+  Input should be less than or equal to 1 [type=less_than_equal, input_value=1.0000001192092896, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.12/v/less_than_equal
+Traceback (most recent call last):
+  File "/home/ilyasyoussefmouhri/Projects/AI Face Recognition/app/services/recognition.py", line 78, in recognize_user
+    return RecognizeResponse(
+        match=True,
+        user_id=best_match.user_id,
+        similarity=best_similarity
+    )
+  File "/home/ilyasyoussefmouhri/Projects/AI Face Recognition/.venv/lib64/python3.14/site-packages/pydantic/main.py", line 250, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for RecognizeResponse
+similarity
+  Input should be less than or equal to 1 [type=less_than_equal, input_value=1.0000001192092896, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.12/v/less_than_equal
+2026-02-10 12:15:06 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:06 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:15:06 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:15:06 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:15:08 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:08 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:08 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:09 [INFO] recognition.py:51 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:15:09 [INFO] recognition.py:76 - recognize_user() - User recognized: John Doe (similarity: 1.000)
+2026-02-10 12:15:10 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:10 [ERROR] deps.py:42 - get_db() - Database error: 422: Expected 1 face, but detected 2 faces
+2026-02-10 12:15:14 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:14 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:15:14 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:15:14 [ERROR] deps.py:42 - get_db() - Database error: 500: Database error occurred
+2026-02-10 12:15:17 [ERROR] insightface.py:67 - embed() - No face detected in the provided image
+2026-02-10 12:15:20 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on GPU
+2026-02-10 12:18:33 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:33 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:33 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:33 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:33 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:18:33 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:18:33 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:18:33 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:18:33 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:18:33 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:18:33 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:18:33 [ERROR] insightface.py:71 - embed() - Multiple faces detected in the provided image: 2
+2026-02-10 12:18:33 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:18:33 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:18:33 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:18:33 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:33 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:18:33 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:18:33 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:18:33 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:33 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:33 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:33 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:18:33 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:18:33 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:18:33 [ERROR] insightface.py:67 - embed() - No face detected in the provided image
+2026-02-10 12:18:33 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:18:33 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:33 [ERROR] insightface.py:55 - embed() - Input must be a numpy array
+2026-02-10 12:18:33 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:33 [ERROR] insightface.py:58 - embed() - Input image must have 3 channels (H, W, 3), got shape (480, 640)
+2026-02-10 12:18:33 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:33 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:18:33 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:18:33 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:18:33 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:18:33 [ERROR] insightface.py:67 - embed() - No face detected in the provided image
+2026-02-10 12:18:33 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:33 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:18:33 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:18:33 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:18:34 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:34 [INFO] recognition.py:51 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:18:34 [INFO] recognition.py:84 - recognize_user() - No match found (best similarity: 0.086)
+2026-02-10 12:18:34 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:34 [ERROR] recognition.py:88 - recognize_user() - Detection failed: Expected 1 face, but detected 2 faces
+2026-02-10 12:18:34 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:34 [ERROR] recognition.py:35 - recognize_user() - Invalid image format: Unsupported image format
+2026-02-10 12:18:34 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:34 [ERROR] recognition.py:88 - recognize_user() - Detection failed: Failed to decode image
+2026-02-10 12:18:34 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:34 [INFO] recognition.py:51 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:18:34 [ERROR] recognition.py:92 - recognize_user() - Database error during recognition: Database connection failed
+Traceback (most recent call last):
+  File "/home/ilyasyoussefmouhri/Projects/AI Face Recognition/app/services/recognition.py", line 54, in recognize_user
+    faces = db.query(Face).join(User).all()
+            ~~~~~~~~^^^^^^
+  File "/usr/lib64/python3.14/unittest/mock.py", line 1175, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/unittest/mock.py", line 1179, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/unittest/mock.py", line 1234, in _execute_mock_call
+    raise effect
+sqlalchemy.exc.SQLAlchemyError: Database connection failed
+2026-02-10 12:18:48 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on GPU
+2026-02-10 12:18:51 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_sc' initialized on CPU
+2026-02-10 12:18:52 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on GPU
+2026-02-10 12:18:53 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:54 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:54 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:54 [ERROR] deps.py:42 - get_db() - Database error: 422: No face detected in the provided image
+2026-02-10 12:18:54 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:54 [INFO] recognition.py:51 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:18:54 [INFO] recognition.py:76 - recognize_user() - User recognized: <Mock name='Bob.name' id='139639808776848'> Jones (similarity: 1.000)
+2026-02-10 12:18:55 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:55 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:18:55 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:18:55 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:18:55 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:18:55 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:18:55 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:18:55 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:18:55 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:18:55 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:18:55 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:18:55 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 12:18:55 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 12:18:55 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:55 [INFO] recognition.py:51 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:18:55 [WARNING] recognition.py:57 - recognize_user() - No faces in database
+2026-02-10 12:18:57 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:58 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:59 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:18:59 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 12:19:02 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:19:02 [ERROR] insightface.py:67 - embed() - No face detected in the provided image
+2026-02-10 12:19:02 [ERROR] deps.py:42 - get_db() - Database error: 500: Database error occurred
+2026-02-10 12:19:03 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:19:03 [ERROR] recognition.py:88 - recognize_user() - Detection failed: No face detected
+2026-02-10 12:19:04 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:19:04 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:19:04 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:19:04 [INFO] recognition.py:51 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 12:19:04 [INFO] recognition.py:76 - recognize_user() - User recognized: John Doe (similarity: 1.000)
+2026-02-10 12:19:13 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on GPU
+2026-02-10 12:19:13 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:19:13 [ERROR] deps.py:42 - get_db() - Database error: 422: Expected 1 face, but detected 2 faces
+2026-02-10 12:19:17 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 12:19:17 [ERROR] deps.py:42 - get_db() - Database error: 1 validation error:
+  {'type': 'missing', 'loc': ('body', 'file'), 'msg': 'Field required', 'input': None}
+
+  File "/home/ilyasyoussefmouhri/Projects/AI Face Recognition/app/api/routes/recognize.py", line 11, in recognize
+    POST /recognize
