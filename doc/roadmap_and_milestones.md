@@ -1,132 +1,189 @@
-# 3-Month Roadmap & Milestones – Face Recognition API
+# Roadmap & Milestones
 
-Time commitment: ~10–15 hours/week  
-Goal: Internship-grade, production-oriented ML API
-
----
-
-## Phase 1 – Backend & Infra Foundations (Weeks 1–2)
-
-### Goals
-- Professional API skeleton
-- PostgreSQL integration
-
-### Tasks
-- FastAPI app setup
-- Async SQLAlchemy + Postgres
-- Alembic migrations
-- Health endpoint
-- Project README draft
-
-### Deliverables
-✅ Running API  
-✅ Database connected  
-✅ Clean repo structure
+This roadmap reflects the **actual implementation state** of the project and the **planned next steps**, aligned with an *internship‑grade, production‑oriented ML backend project*.
 
 ---
 
-## Phase 2 – Image Handling & Validation (Week 3)
+## Phase 0 – Project Foundation (Completed)
 
-### Goals
-- Robust image ingestion
+**Goal:** Set up a professional backend foundation.
 
-### Tasks
-- Multipart image uploads
-- Image validation & preprocessing
-- Error handling
+**Completed:**
 
-### Deliverables
-✅ /register accepts images  
-✅ Invalid images rejected cleanly
+* FastAPI application structure
+* Environment configuration via `.env`
+* Logging system (`app/core/logs.py`, persisted logs)
+* Health check endpoint
+* Dependency injection pattern (`deps.py`)
+* Alembic migrations setup
+* SQLAlchemy session & base models
+* Pytest configuration and test harness
 
----
+**Skills demonstrated:**
 
-## Phase 3 – Face Detection Module (Weeks 4–5)
-
-### Goals
-- Face detection layer
-
-### Tasks
-- Integrate MTCNN or RetinaFace
-- Extract embeddings and confidence scores
-- Unit tests
-
-### Deliverables
-✅ Detector works 
-✅ Single-face enforcement
+* Backend project structuring
+* Dependency injection
+* Database migrations
+* Testing fundamentals
 
 ---
 
-## Phase 4 – Embeddings & ML Logic (Weeks 6–7)
+## Phase 1 – Face Registration Pipeline (Completed)
 
-### Goals
-- Identity representation
+**Goal:** Register users and persist face embeddings safely.
 
-### Tasks
-- ArcFace / FaceNet embeddings via DeepFace
-- Normalization
-- Store embeddings in PostgreSQL
-- Distance metrics
+**Implemented:**
 
-### Deliverables
-✅ Embeddings persisted  
-✅ Reproducible vectors
+* `/register` endpoint
+* UUID‑based user identity (no client‑side IDs)
+* `User` and `Face` relational models
+* Image validation and preprocessing
+* Face detection (single face enforced)
+* InsightFace embedding extraction
+* Transaction‑safe DB writes
 
----
+**Design decisions:**
 
-## Phase 5 – Recognition Endpoint (Week 8)
+* UUIDs generated server‑side
+* Registration schema separate from DB models
+* One‑to‑many (`User → Face`) support for extensibility
 
-### Goals
-- End-to-end recognition
+**Skills demonstrated:**
 
-### Tasks
-- Implement /recognize
-- Threshold logic
-- Match scoring
-- Clear API responses
-
-### Deliverables
-✅ Face recognition works  
-✅ Confidence scores returned
+* ML pipeline integration
+* Transaction safety
+* Schema vs model separation
 
 ---
 
-## Phase 6 – Engineering Polish (Weeks 9–10)
+## Phase 2 – Face Recognition Pipeline (Completed)
 
-### Goals
-- Production readiness
+**Goal:** Identify users from an uploaded image.
 
-### Tasks
-- Logging
-- Exception hierarchy
-- Pytest coverage
-- API docs review
+**Implemented:**
 
-### Deliverables
-✅ Stable API  
-✅ Testable services
+* `/recognize` endpoint
+* Shared preprocessing & validation logic
+* InsightFace embedder loaded once at startup
+* Matcher abstraction (cosine similarity + threshold)
+* Full DB scan for similarity comparison
+* Best‑match selection logic
+* Typed response schema with similarity score
+
+**Current limitations (intentional):**
+
+* Linear scan over embeddings
+* In‑memory similarity computation
+
+**Skills demonstrated:**
+
+* ML inference services
+* Similarity search logic
+* Clean error handling for ML edge cases
 
 ---
 
-## Phase 7 – Advanced Extension (Weeks 11–12)
+## Phase 3 – API Hardening & Security (Next)
 
-### Choose ONE:
-- pgvector integration
-- Webcam / live recognition
-- Dockerized deployment
+**Goal:** Make the API production‑grade.
 
-### Deliverables
-🔥 Advanced feature  
-🔥 Strong portfolio signal
+**Planned:**
+
+* Rate limiting (recognition abuse prevention)
+* Request size & content enforcement
+* Structured error responses
+* Authentication layer (JWT or OAuth2)
+* Protected endpoints (`/delete_user`, future admin ops)
+
+**Skills targeted:**
+
+* API security
+* AuthN / AuthZ
+* Production FastAPI patterns
+
+---
+
+## Phase 4 – Vector Storage & Scaling (Next)
+
+**Goal:** Prepare for real‑world scale.
+
+**Planned:**
+
+* PostgreSQL + pgvector integration
+* Vector index (IVFFLAT / HNSW)
+* DB‑side similarity search
+* Threshold tuning via validation data
+
+**Outcome:**
+
+* Replace O(N) scan with indexed search
+* ML‑aware database design
+
+**Skills targeted:**
+
+* Vector databases
+* ML system scaling
+* Performance engineering
+
+---
+
+## Phase 5 – User Lifecycle Management (Planned)
+
+**Goal:** Complete identity lifecycle.
+
+**Planned:**
+
+* `/delete_user` endpoint
+* Auth‑protected destructive actions
+* Cascading face deletion
+* Audit‑safe operations
+
+**Skills targeted:**
+
+* Secure CRUD design
+* Data integrity
+
+---
+
+## Phase 6 – Deployment & DevOps (Planned)
+
+**Goal:** Make it deployable anywhere.
+
+**Planned:**
+
+* Dockerfile (API + model runtime)
+* Docker Compose (API + Postgres)
+* Environment‑based configs
+* Optional CI pipeline
+
+**Skills targeted:**
+
+* Containerization
+* DevOps fundamentals
+
+---
+
+## Phase 7 – Optional UI & Webcam Support (Optional)
+
+**Goal:** Showcase end‑to‑end system.
+
+**Planned:**
+
+* Webcam capture (browser)
+* Simple frontend (React / HTML)
+* Live recognition demo
+
+**Note:** Optional, value is *demonstration*, not core ML skill.
 
 ---
 
 ## Final Outcome
 
-You demonstrate:
-- Real ML system design
-- Production backend skills
-- Conscious tech trade-offs
-- Ethical awareness
+By the end of this roadmap, the project demonstrates:
 
-This is **internship-grade**, not tutorial-grade.
+* End‑to‑end ML backend ownership
+* Production‑grade API design
+* Vector similarity search at scale
+* Real‑world face recognition constraints
+
+This positions the project as **strong internship / junior ML engineer level**, with clear signals for backend + ML systems roles.
