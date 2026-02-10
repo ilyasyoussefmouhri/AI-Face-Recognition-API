@@ -1,9 +1,74 @@
-2026-02-08 04:55:05 [DEBUG] validation.py:12 - validate_image() - Reading image format
-2026-02-08 04:55:05 [DEBUG] validation.py:27 - validate_image() - jpeg image detected
-2026-02-08 04:55:05 [DEBUG] preprocessing.py:44 - decode_image() - Read 93392 bytes from file
-2026-02-08 04:55:05 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
-2026-02-08 04:55:05 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 1280x1280, mode=RGB, size=93392 bytes
-2026-02-08 04:55:05 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(1280, 1280, 3), dtype=uint8
-2026-02-08 04:55:06 [INFO] insightface.py:59 - embed() - Detecting faces in image with InsightFace buffalo_l model...
-2026-02-08 04:55:06 [INFO] insightface.py:72 - embed() - Face detected with embedding of shape (512,)
-2026-02-08 04:55:06 [INFO] registration.py:56 - register_user() - User ilyas registered successfully.
+2026-02-10 02:36:55 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 02:36:55 [DEBUG] validation.py:12 - validate_image() - Reading image format
+2026-02-10 02:36:55 [DEBUG] validation.py:27 - validate_image() - jpeg image detected
+2026-02-10 02:36:55 [DEBUG] preprocessing.py:44 - decode_image() - Read 93392 bytes from file
+2026-02-10 02:36:55 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
+2026-02-10 02:36:55 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 1280x1280, mode=RGB, size=93392 bytes
+2026-02-10 02:36:55 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(1280, 1280, 3), dtype=uint8
+2026-02-10 02:36:55 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 02:36:57 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 02:36:57 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 02:36:57 [INFO] registration.py:47 - register_user() - Registering user Ilyas youssef Mouhri...
+2026-02-10 02:36:57 [INFO] registration.py:50 - register_user() - User object created
+2026-02-10 02:36:57 [INFO] registration.py:57 - register_user() - Face object created
+2026-02-10 02:36:57 [INFO] registration.py:64 - register_user() - User Ilyas youssef Mouhri registered successfully with ID a165cd07-26d5-4a65-b3e9-5f3f7e323528
+2026-02-10 03:10:03 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 03:10:03 [DEBUG] validation.py:12 - validate_image() - Reading image format
+2026-02-10 03:10:03 [DEBUG] validation.py:27 - validate_image() - jpeg image detected
+2026-02-10 03:10:03 [DEBUG] preprocessing.py:44 - decode_image() - Read 93392 bytes from file
+2026-02-10 03:10:03 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
+2026-02-10 03:10:03 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 1280x1280, mode=RGB, size=93392 bytes
+2026-02-10 03:10:03 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(1280, 1280, 3), dtype=uint8
+2026-02-10 03:10:03 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 03:10:05 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 03:10:05 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 03:10:05 [INFO] recognition.py:46 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 03:10:05 [INFO] recognition.py:70 - recognize_user() - User recognized: Ilyas youssef Mouhri (similarity: 1.000)
+2026-02-10 03:11:54 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 03:11:54 [DEBUG] validation.py:12 - validate_image() - Reading image format
+2026-02-10 03:11:54 [DEBUG] validation.py:27 - validate_image() - jpeg image detected
+2026-02-10 03:11:54 [DEBUG] preprocessing.py:44 - decode_image() - Read 93392 bytes from file
+2026-02-10 03:11:54 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
+2026-02-10 03:11:54 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 1280x1280, mode=RGB, size=93392 bytes
+2026-02-10 03:11:54 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(1280, 1280, 3), dtype=uint8
+2026-02-10 03:11:54 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 03:11:56 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 03:11:56 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 03:11:56 [INFO] recognition.py:46 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 03:11:56 [INFO] recognition.py:70 - recognize_user() - User recognized: Ilyas youssef Mouhri (similarity: 1.000)
+2026-02-10 03:13:05 [DEBUG] validation.py:12 - validate_image() - Reading image format
+2026-02-10 03:13:05 [DEBUG] validation.py:27 - validate_image() - jpeg image detected
+2026-02-10 03:13:05 [DEBUG] preprocessing.py:44 - decode_image() - Read 107092 bytes from file
+2026-02-10 03:13:05 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
+2026-02-10 03:13:05 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 800x800, mode=RGB, size=107092 bytes
+2026-02-10 03:13:05 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(800, 800, 3), dtype=uint8
+2026-02-10 03:13:05 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 03:13:05 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 03:13:05 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 03:13:05 [INFO] recognition.py:46 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 03:13:05 [INFO] recognition.py:80 - recognize_user() - No match found (best similarity: 0.157)
+2026-02-10 10:22:46 [INFO] insightface.py:33 - __init__() - InsightFace model 'buffalo_l' initialized on CPU
+2026-02-10 10:22:46 [DEBUG] validation.py:12 - validate_image() - Reading image format
+2026-02-10 10:22:46 [DEBUG] validation.py:27 - validate_image() - jpeg image detected
+2026-02-10 10:22:46 [DEBUG] preprocessing.py:44 - decode_image() - Read 107092 bytes from file
+2026-02-10 10:22:46 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
+2026-02-10 10:22:46 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 800x800, mode=RGB, size=107092 bytes
+2026-02-10 10:22:46 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(800, 800, 3), dtype=uint8
+2026-02-10 10:22:46 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 10:22:49 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 10:22:49 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 10:22:49 [INFO] registration.py:47 - register_user() - Registering user rayane mousleh...
+2026-02-10 10:22:49 [INFO] registration.py:50 - register_user() - User object created
+2026-02-10 10:22:49 [INFO] registration.py:57 - register_user() - Face object created
+2026-02-10 10:22:49 [INFO] registration.py:64 - register_user() - User rayane mousleh registered successfully with ID b2d2798e-2b24-4fdb-87d8-1c26169a5f27
+2026-02-10 10:23:29 [DEBUG] validation.py:12 - validate_image() - Reading image format
+2026-02-10 10:23:29 [DEBUG] validation.py:27 - validate_image() - jpeg image detected
+2026-02-10 10:23:29 [DEBUG] preprocessing.py:44 - decode_image() - Read 107092 bytes from file
+2026-02-10 10:23:29 [DEBUG] preprocessing.py:47 - decode_image() - Decoding image...
+2026-02-10 10:23:29 [DEBUG] preprocessing.py:78 - decode_image() - Decoded image: JPEG, 800x800, mode=RGB, size=107092 bytes
+2026-02-10 10:23:29 [DEBUG] preprocessing.py:109 - load_image() - Converted image to array: shape=(800, 800, 3), dtype=uint8
+2026-02-10 10:23:29 [INFO] insightface.py:62 - embed() - Running InsightFace buffalo_l inference...
+2026-02-10 10:23:30 [INFO] insightface.py:76 - embed() - Face detected with embedding of shape (512,)
+2026-02-10 10:23:30 [INFO] insightface.py:85 - embed() - Face embedding normalized to shape (512,)
+2026-02-10 10:23:30 [INFO] recognition.py:46 - recognize_user() - Recognizing user from uploaded image...
+2026-02-10 10:23:30 [INFO] recognition.py:71 - recognize_user() - User recognized: rayane mousleh (similarity: 1.000)

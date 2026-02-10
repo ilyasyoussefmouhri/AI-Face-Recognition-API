@@ -30,6 +30,10 @@ class InsightFaceEmbedder:
         self.model_name = model_name
         self.app = FaceAnalysis(name=model_name, providers=providers)
         self.app.prepare(ctx_id=ctx_id)
+        logger.info(
+            f"InsightFace model '{model_name}' initialized on {device.name}"
+        )
+
         self.device = device
     def embed(self, img_array: np.ndarray) -> FaceEmbedding:
         """
@@ -55,8 +59,8 @@ class InsightFaceEmbedder:
             raise ValueError(f"Input image must have 3 channels (H, W, 3), got shape {img_array.shape}")
 
         # Detect faces and extract embedding
+        logger.info(f"Running InsightFace {self.model_name} inference...")
         faces = self.app.get(img_array)
-        logger.info(f"Detecting faces in image with InsightFace {self.model_name} model...")
 
         # Handle edge cases: no face or multiple faces = error
         if len(faces) == 0:
@@ -70,7 +74,16 @@ class InsightFaceEmbedder:
         # Extract the single face
         face = faces[0]
         logger.info(f"Face detected with embedding of shape {face.embedding.shape}")
+
+        # Normalize embedding
+        embedding = face.embedding
+        norm = np.linalg.norm(embedding)
+        if norm == 0:
+            logger.error("Zero-norm embedding detected")
+            raise RuntimeError("Zero-norm embedding detected")
+        embedding = embedding / norm
+        logger.info(f"Face embedding normalized to shape {embedding.shape}")
         return FaceEmbedding(
-            embedding=face.embedding,
+            embedding=embedding,
             detection_score=float(face.det_score)
         )

@@ -3,7 +3,10 @@ from app.db.session import SessionLocal
 from fastapi import UploadFile, HTTPException, status
 from app.core.security import MAX_FILE_SIZE
 from app.models.insightface import InsightFaceEmbedder
+from app.models.matcher import InsightFaceMatcher
 from app.core.config import Device
+from app.core.logs import logger
+
 
 # Loads embedder model once at startup
 _embedder_instance = None
@@ -17,12 +20,28 @@ def get_embedder() -> InsightFaceEmbedder:
         )
     return _embedder_instance
 
+# Loads matcher once at startup
+_matcher_instance = None
+
+def get_matcher() -> InsightFaceMatcher:
+    global _matcher_instance
+    if _matcher_instance is None:
+        _matcher_instance = InsightFaceMatcher(
+            threshold=0.7  # Adjust this value based on your needs
+        )
+    return _matcher_instance
+
 
 # Database session dependency
 def get_db():
     db = SessionLocal()
     try:
         yield db
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        logger.error(f"Database error: {e}")
+        raise e
     finally:
         db.close()
 
