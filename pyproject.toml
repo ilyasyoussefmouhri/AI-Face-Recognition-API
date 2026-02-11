@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "face-recognition-backend"
+version = "0.1.0"
+dependencies = [
+    "fastapi==0.128.0",
+    "uvicorn[standard]==0.40.0",
+    "insightface==0.7.3",
+    "onnxruntime-gpu==1.24.1",
+    "opencv-python-headless==4.13.0.92",
+    "numpy>=2.0.0",
+    "SQLAlchemy==2.0.46",
+    "psycopg[c]==3.3.2",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.7.0",
+    "python-multipart",
+    "alembic==1.18.2",
+    "pillow==12.1.0",
+    "python-dotenv",
+    "simsimd",
+    "stringzilla",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0.0",
+    "pytest-cov",
+    "pytest-xdist",
+    "pytest-cov==7.0.0",
+    "pytest-html==4.2.0",
+    "pytest-metadata==3.1.1",
+    "pytest-sugar==1.1.1",
+    "pytest-benchmark==5.2.3",
+    "httpx",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]
+exclude = ["alembic*", "data*", "reports*", "tests*"]
+namespaces = false
