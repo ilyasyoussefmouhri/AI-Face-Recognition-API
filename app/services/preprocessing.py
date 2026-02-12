@@ -4,7 +4,8 @@ import cv2
 from PIL import Image, ImageOps
 from typing import Set
 from app.core.logs import logger
-from app.core.config import ImageConfig, ImageProcessingError
+from app.core.config import ImageConfig
+from app.utils.exceptions import ImageProcessingError
 
 Image.MAX_IMAGE_PIXELS = ImageConfig().max_image_pixels * 2
 

@@ -5,7 +5,8 @@ Provides face detection and embedding extraction using InsightFace.
 import numpy as np
 from insightface.app import FaceAnalysis
 from app.schemas.detection import FaceEmbedding
-from app.core.config import NoFaceDetectedError, MultipleFacesDetectedError, Device
+from app.utils.exceptions import NoFaceDetectedError, MultipleFacesDetectedError
+from app.core.config import Device
 from app.core.logs import logger
 
 

@@ -5,7 +5,7 @@ from app.db.models import User, Face
 from app.services.preprocessing import decode_image, load_image
 from app.services.validation import validate_image
 from app.models.insightface import InsightFaceEmbedder
-from app.core.config import (
+from app.utils.exceptions import (
     NoFaceDetectedError,
     MultipleFacesDetectedError,
     ImageProcessingError

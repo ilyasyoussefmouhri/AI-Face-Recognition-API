@@ -52,15 +52,14 @@ app/
 │   └── __init__.py
 │
 ├── models/                  # ML / CV components
-│   ├── detector.py          # Face detection abstraction
 │   ├── insightface.py       # Embedding model wrapper
 │   ├── matcher.py           # Embedding similarity logic
 │   └── __init__.py
 │
 ├── schemas/                 # Pydantic schemas
-│   ├── detection.py
-│   ├── register_schema.py
-│   ├── recognize_schema.py
+│   ├── detection.py         # Face detection schema
+│   ├── register_schema.py   # Registration response schemas
+│   ├── recognize_schema.py  # Recognition response schemas
 │   └── __init__.py
 │
 ├── services/                # Business logic
