@@ -19,7 +19,8 @@ def register_user(
         name: str,
         surname: str,
         db: Session,
-        embedder: InsightFaceEmbedder
+        embedder: InsightFaceEmbedder,
+        auth_user_id,
 ) -> RegisterResponse:
     """
     Register a new user with their face embedding.
@@ -46,7 +47,7 @@ def register_user(
         # Step 5: Save to database
         logger.info(f"Registering user {name} {surname}...")
 
-        user = User(name=name, surname=surname)
+        user = User(name=name, surname=surname, auth_user_id=auth_user_id)
         logger.info(f"User object created")
 
         face = Face(
