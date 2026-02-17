@@ -13,3 +13,8 @@ class MultipleFacesDetectedError(Exception):
 class ImageProcessingError(Exception):
     """Custom exception for image processing errors."""
     pass
+
+
+class CredentialsError(Exception):
+    """Raised when there is an issue with user credentials."""
+    pass

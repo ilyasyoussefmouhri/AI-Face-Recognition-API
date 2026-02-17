@@ -8,7 +8,7 @@ from app.models.insightface import InsightFaceEmbedder
 
 
 router = APIRouter()
-@router.post("/register")
+@router.post("/register", tags=["register"])
 async def register(
     file: UploadFile = Depends(valid_content_length),
     name: str = Form(...),

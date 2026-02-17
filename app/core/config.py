@@ -51,7 +51,9 @@ class Settings(BaseSettings):
         """Access parsed signatures"""
         return self.SIGNATURES_JSON
 
-
+    SECRET_KEY: str = Field(..., description="Secret key for cryptographic operations")
+    ALGORITHM: str = Field(default="HS256", description="Allowed JWT algorithms")
+    ACCESS_TOKEN_EXPIRE_SECONDS: int = Field(default=30*60, description="Access token expiration time in minutes")
     MAX_FILE_SIZE : int = Field(default=10485760, description="Maximum file size in bytes")
 
     PROJECT_ROOT: ClassVar[Path] = Path(__file__).resolve().parents[2]
