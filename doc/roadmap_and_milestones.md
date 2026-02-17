@@ -1,4 +1,4 @@
-# Roadmap & Milestones
+~~# Roadmap & Milestones
 
 This roadmap reflects the **actual implementation state** of the project and the **planned next steps**, aligned with an *internship‑grade, production‑oriented ML backend project*.
 
@@ -85,7 +85,7 @@ This roadmap reflects the **actual implementation state** of the project and the
 
 ## Phase 3 – API Hardening & Security (Next)
 
-**Goal:** Make the API production‑grade.
+**~~Goal:** Make the API production‑grade.
 
 **Planned:**
 

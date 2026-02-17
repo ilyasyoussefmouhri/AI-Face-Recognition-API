@@ -1,16 +1,19 @@
-from fastapi import APIRouter, UploadFile, Form
+from fastapi import APIRouter, UploadFile, Form, Request
 from fastapi.params import Depends
 from sqlalchemy.orm import Session
 from app.api.deps import get_db, valid_content_length, get_embedder, get_current_user
 from app.services.registration import register_user
 from app.models.insightface import InsightFaceEmbedder
 from app.db.models import AuthUser
+from app.core.limiter import limiter
 
 
 
 router = APIRouter()
 @router.post("/register", tags=["register"])
+@limiter.limit("5/minute")
 async def register(
+    request: Request,
     file: UploadFile = Depends(valid_content_length),
     name: str = Form(...),
     surname: str = Form(...),

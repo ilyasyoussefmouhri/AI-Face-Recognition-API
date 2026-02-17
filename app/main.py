@@ -1,5 +1,10 @@
 from fastapi import FastAPI
 from app.api.routes import register, recognize, health, auth
+from app.core.limiter import limiter
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+
+
 
 app = FastAPI(
     title="AI Face Recognition API",
@@ -11,6 +16,9 @@ app.include_router(recognize.router)
 app.include_router(register.router)
 
 app.include_router(auth.router, tags=["auth"])
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 
 # This function is only for manual testing/setup
 
