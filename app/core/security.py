@@ -5,6 +5,8 @@ import bcrypt
 from app.core.config import settings
 from app.core.logs import logger
 from app.utils.exceptions import CredentialsError
+from jose.exceptions import ExpiredSignatureError
+from fastapi import HTTPException, status
 
 
 def hash_password(password: str) -> str:
@@ -61,6 +63,12 @@ def decode_access_token(token: str) -> dict:
             algorithms=[settings.ALGORITHM]
         )
         return payload
+    except ExpiredSignatureError:
+        logger.error("Access token has expired")
+        raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Token has expired"
+        )
     except JWTError:
         logger.error("Invalid access token provided")
         raise CredentialsError()

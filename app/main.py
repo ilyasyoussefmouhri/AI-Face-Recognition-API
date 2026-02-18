@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api.routes import register, recognize, health, auth
+from app.api.routes import register, recognize, health, auth, delete
 from app.core.limiter import limiter
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
@@ -14,6 +14,7 @@ app = FastAPI(
 app.include_router(health.router)
 app.include_router(recognize.router)
 app.include_router(register.router)
+app.include_router(delete.router, tags=["delete"])
 
 app.include_router(auth.router, tags=["auth"])
 app.state.limiter = limiter

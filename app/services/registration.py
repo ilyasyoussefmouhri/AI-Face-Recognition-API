@@ -1,4 +1,4 @@
-from fastapi import UploadFile, HTTPException
+from fastapi import UploadFile, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 from app.db.models import User, Face
@@ -44,6 +44,18 @@ def register_user(
         # Step 4: Extract embedding
         embedding_obj = embedder.embed(img_array)
 
+        # Check if user with same auth_user_id already has biometric data
+        existing = db.query(User).filter(
+            User.auth_user_id == auth_user_id
+        ).first()
+
+        if existing:
+            logger.error(f"User {auth_user_id} already has biometric data")
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail="Biometric data already registered. Delete existing profile first."
+            )
+
         # Step 5: Save to database
         logger.info(f"Registering user {name} {surname}...")
 
@@ -65,7 +77,8 @@ def register_user(
         logger.info(f"User {user.name} {user.surname} registered successfully with ID {user.user_id}")
 
         return response
-
+    except HTTPException:
+        raise  # Re-raise HTTP exceptions to be handled by FastAPI
     except (ImageProcessingError, NoFaceDetectedError, MultipleFacesDetectedError) as e:
         logger.error(f"Registration failed: {str(e)}")
         raise HTTPException(status_code=422, detail=str(e))
