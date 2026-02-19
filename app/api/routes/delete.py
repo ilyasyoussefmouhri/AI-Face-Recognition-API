@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app.api.deps import get_current_user,get_current_admin, get_db
 from app.db.models import AuthUser
 from uuid import UUID
-from app.services.deletion import delete_user, delete_me
+from app.services.deletion import delete_user as delete_user_service, delete_me as delete_me_service
 
 
 
@@ -21,7 +21,7 @@ def delete_me(
     Delete authenticated user's biometric data.
     If delete_auth_user=true, deletes auth account (cascade handles biometric data).
     """
-    delete_me(delete_auth_user=delete_auth_user, current_user=current_user, db=db)
+    delete_me_service(delete_auth_user=delete_auth_user, current_user=current_user, db=db)
 
     return
 
@@ -37,5 +37,5 @@ def delete_user(
     Admin deletes biometric data for a user.
     If delete_auth_user=true, also deletes the auth account.
     """
-    delete_user(user_id=user_id, delete_auth_user=delete_auth_user,db=db)
+    delete_user_service(user_id=user_id, delete_auth_user=delete_auth_user,db=db)
     return

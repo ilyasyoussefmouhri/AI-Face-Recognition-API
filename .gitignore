@@ -1,4 +1,4 @@
-# === Python ===
+    # === Python ===
 __pycache__/
 *.py[cod]
 *$py.class
@@ -65,6 +65,10 @@ models/*
 !models/.gitkeep
 *.onnx
 .insightface/
+.insightface_cache/
+
+# Database in docker
+postgres_data/
 
 # Database (if local)
 *.db

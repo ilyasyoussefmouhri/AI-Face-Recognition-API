@@ -1,8 +1,7 @@
 # env, settings
 from pydantic import Field, PostgresDsn, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pathlib import Path
-from typing import ClassVar
+from typing import Union
 from dataclasses import dataclass
 from enum import Enum
 from app.core.logs import logger
@@ -16,7 +15,7 @@ class Settings(BaseSettings):
         description="PostgreSQL SQLAlchemy URL"
     )
 
-    @field_validator("DATABASE_URL", mode="after")
+    @field_validator("DATABASE_URL", mode="before")
     @classmethod
     def validate_driver(cls, v: PostgresDsn) -> str:
         url = str(v)
@@ -27,7 +26,7 @@ class Settings(BaseSettings):
             return url.replace("postgresql://", "postgresql+psycopg://", 1)
         return url
 
-    SIGNATURES_JSON : dict = Field(
+    SIGNATURES_JSON : Union[dict, str] = Field(
         ...,
         description="Magical numbers of allowed file types"
     )
@@ -56,9 +55,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_SECONDS: int = Field(default=30*60, description="Access token expiration time in minutes")
     MAX_FILE_SIZE : int = Field(default=10485760, description="Maximum file size in bytes")
 
-    PROJECT_ROOT: ClassVar[Path] = Path(__file__).resolve().parents[2]
-    ENV_FILE: ClassVar[Path] = PROJECT_ROOT / ".env"
-    model_config = SettingsConfigDict(env_file=ENV_FILE, extra="ignore")
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
 
 # Enum for device selection
