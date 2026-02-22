@@ -24,7 +24,6 @@ MANIFEST
 
 # === Testing ===
 .pytest_cache/
-.benchmarks/
 .coverage
 coverage.xml
 htmlcov/
@@ -104,3 +103,6 @@ app/db/migrations/versions/*.pyc
 *.pickle
 *.pt
 *.pth
+
+# Benchmark results
+benchmarks/results/*.csv

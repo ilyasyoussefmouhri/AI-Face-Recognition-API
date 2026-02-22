@@ -22,4 +22,4 @@ async def recognize(
         ):
 
 
-    return recognize_user(file=file,db=db,embedder=embedder,matcher=matcher)
+    return recognize_user(file=file,db=db,embedder=embedder,matcher=matcher, request=request)

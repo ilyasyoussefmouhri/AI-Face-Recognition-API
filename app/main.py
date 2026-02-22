@@ -4,6 +4,7 @@ from app.core.limiter import limiter
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from fastapi.middleware.cors import CORSMiddleware
+from app.middleware.benchmark_timing import BenchmarkTimingMiddleware
 
 
 
@@ -12,6 +13,14 @@ app = FastAPI(
     version="1.0",
 )
 
+app.add_middleware(
+CORSMiddleware,
+allow_origins=[""],
+allow_credentials=True,
+allow_methods=[""],
+allow_headers=["*"],
+)
+app.add_middleware(BenchmarkTimingMiddleware)
 app.include_router(health.router)
 app.include_router(recognize.router)
 app.include_router(register.router)
@@ -21,13 +30,6 @@ app.include_router(auth.router, tags=["auth"])
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-app.add_middleware(
-CORSMiddleware,
-allow_origins=[""],
-allow_credentials=True,
-allow_methods=[""],
-allow_headers=["*"],
-)
 
 # This function is only for manual testing/setup
 

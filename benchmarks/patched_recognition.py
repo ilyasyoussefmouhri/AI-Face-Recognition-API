@@ -10,7 +10,17 @@
 # When BENCHMARK_MODE=false (the default), the two `if BENCHMARK_MODE`
 # branches are never entered and there is zero overhead.
 #
-
+# ── How to wire the request through ─────────────────────────────────────────
+# In app/api/routes/recognize.py change:
+#
+#     return recognize_user(file=file, db=db, embedder=embedder, matcher=matcher)
+#
+# to:
+#
+#     return recognize_user(file=file, db=db, embedder=embedder,
+#                           matcher=matcher, request=request)
+#
+# That single-line change is enough; the route already receives `request`.
 
 import os
 import time
@@ -41,7 +51,7 @@ def recognize_user(
         embedder: InsightFaceEmbedder,
         matcher: InsightFaceMatcher,
         db: Session,
-        request: Request | None = None,
+        request: Request | None = None,   # ← NEW optional param
 ) -> RecognizeResponse:
     """
     Recognize a user from an uploaded image.

@@ -1,0 +1,17 @@
+# HTTP client (for run_benchmark.py)
+requests==2.32.5
+
+# Database (psycopg v3 — matches your project's driver exactly)
+psycopg==3.3.2
+
+# Numerical
+numpy==2.4.2
+
+# Load testing
+locust>=2.28.0
+
+# Resource monitoring
+psutil>=6.0.0
+
+# SQLAlchemy (for run_benchmark_direct.py which uses SessionLocal)
+SQLAlchemy==2.0.46

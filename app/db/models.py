@@ -12,7 +12,7 @@ class Face(Base):
     __tablename__ = "faces"
 
     face_id = Column(UUID(as_uuid=True), primary_key=True, default=lambda: uuid.uuid4())
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.user_id"), nullable=False)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.user_id", ondelete="CASCADE"), nullable=False)
     embedding = Column(ARRAY(Float), nullable=False) # Embedding stored as float array, will later change to Vector(512)
     detection_score = Column(Float, nullable=True) # Detection confidence score
 
