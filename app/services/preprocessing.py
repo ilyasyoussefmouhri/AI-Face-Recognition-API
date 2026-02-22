@@ -114,3 +114,19 @@ def load_image(img: Image.Image) -> np.asarray:
    except Exception as e:
        logger.error(f"Failed to convert image to array: {type(e).__name__}: {e}", exc_info=True)
        raise ImageProcessingError(f"Failed to convert image to array: {str(e)}") from e
+
+
+def resize_if_needed(img_array:np.asarray):
+    max_dim = 640
+    h, w = img_array.shape[:2]
+
+    if max(h, w) > max_dim:
+        scale = max_dim / max(h, w)
+        new_w = int(w * scale)
+        new_h = int(h * scale)
+        img_array = cv2.resize(img_array, (new_w, new_h))
+        logger.debug(f"Resized image to {new_w}x{new_h}")
+        return img_array
+    else:
+        logger.debug(f"Image dimensions {w}x{h} are within limits")
+        return img_array

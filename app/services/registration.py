@@ -2,7 +2,7 @@ from fastapi import UploadFile, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 from app.db.models import User, Face
-from app.services.preprocessing import decode_image, load_image
+from app.services.preprocessing import decode_image, load_image, resize_if_needed
 from app.services.validation import validate_image
 from app.models.insightface import InsightFaceEmbedder
 from app.utils.exceptions import (
@@ -38,8 +38,9 @@ def register_user(
         # Step 2: Decode image into PIL image
         image_pil = decode_image(file.file)
 
-        # Step 3: Load image into numpy array
+        # Step 3: Load image into numpy array and resize if needed
         img_array = load_image(image_pil)
+        img_array = resize_if_needed(img_array)
 
         # Step 4: Extract embedding
         embedding_obj = embedder.embed(img_array)

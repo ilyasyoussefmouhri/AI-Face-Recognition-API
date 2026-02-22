@@ -68,3 +68,7 @@ REQUEST_GAP_SECONDS = 0.5  # sleep between individual requests
 LOCUST_USERS = int(os.getenv("LOCUST_USERS", "1"))
 LOCUST_SPAWN_RATE = int(os.getenv("LOCUST_SPAWN_RATE", "1"))
 LOCUST_RUN_TIME = os.getenv("LOCUST_RUN_TIME", "60s")
+# Timeout for concurrent benchmark requests
+# At 20 concurrent users × ~1300ms baseline = ~26000ms theoretical max
+# Set to 120s to avoid false timeouts masking real queuing behaviour
+BENCHMARK_HTTP_TIMEOUT = float(os.getenv("BENCHMARK_HTTP_TIMEOUT", "120"))

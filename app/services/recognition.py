@@ -1,12 +1,13 @@
 import os
 import time
+from functools import partial
 
 from fastapi import UploadFile, HTTPException, Request
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import text
 from app.db.models import User, Face
-from app.services.preprocessing import decode_image, load_image
+from app.services.preprocessing import decode_image, load_image, resize_if_needed
 from app.services.validation import validate_image
 from app.models.insightface import InsightFaceEmbedder
 from app.utils.exceptions import (
@@ -17,11 +18,13 @@ from app.utils.exceptions import (
 from app.core.logs import logger
 from app.schemas.recognize_schema import RecognizeResponse
 from app.models.matcher import InsightFaceMatcher
+import asyncio
+from functools import partial
 
 BENCHMARK_MODE: bool = os.getenv("BENCHMARK_MODE", "false").lower() == "true"
 
 
-def recognize_user(
+async def recognize_user(
         file: UploadFile,
         embedder: InsightFaceEmbedder,
         matcher: InsightFaceMatcher,
@@ -37,9 +40,16 @@ def recognize_user(
     try:
         image_pil = decode_image(file.file)
         img_array = load_image(image_pil)
+        img_array = resize_if_needed(img_array)
         # ── Inference phase ───────────────────────────────────────────────────
+        # Run CPU-bound inference in thread pool so the event loop
+        # can accept other requests while this blocks
         _ti0 = time.perf_counter()
-        embedding_obj = embedder.embed(img_array)
+        loop = asyncio.get_running_loop()
+        embedding_obj = await loop.run_in_executor(
+            None,
+            partial(embedder.embed, img_array)
+        )
         _ti1 = time.perf_counter()
         if BENCHMARK_MODE and request is not None:
             request.state.inference_time_ms = (_ti1 - _ti0) * 1000
