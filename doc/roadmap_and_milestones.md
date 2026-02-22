@@ -83,7 +83,7 @@ This roadmap reflects the **actual implementation state** of the project and the
 
 ---
 
-## Phase 3 – API Hardening & Security (Next)
+## Phase 3 – API Hardening & Security (Completed)
 
 **~~Goal:** Make the API production‑grade.
 
@@ -103,7 +103,7 @@ This roadmap reflects the **actual implementation state** of the project and the
 
 ---
 
-## Phase 4 – Vector Storage & Scaling (Next)
+## Phase 4 – Vector Storage & Scaling (Completed)
 
 **Goal:** Prepare for real‑world scale.
 
@@ -127,7 +127,7 @@ This roadmap reflects the **actual implementation state** of the project and the
 
 ---
 
-## Phase 5 – User Lifecycle Management (Planned)
+## Phase 5 – User Lifecycle Management (Completed)
 
 **Goal:** Complete identity lifecycle.
 
@@ -145,7 +145,7 @@ This roadmap reflects the **actual implementation state** of the project and the
 
 ---
 
-## Phase 6 – Deployment & DevOps (Planned)
+## Phase 6 – Deployment & DevOps (Completed)
 
 **Goal:** Make it deployable anywhere.
 
