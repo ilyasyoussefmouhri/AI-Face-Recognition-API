@@ -45,44 +45,48 @@ from app.models.matcher import InsightFaceMatcher
 
 
 def _run_db_and_similarity(query_embedding: np.ndarray, matcher: InsightFaceMatcher) -> dict:
-    """
-    Open a DB session, fetch all faces, run the similarity loop, close session.
-    Returns timing for each phase in milliseconds.
-    """
-    db = SessionLocal()
+    import psycopg
+    from config import DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME
+
+    conn = psycopg.connect(
+        host=DB_HOST, port=int(DB_PORT),
+        user=DB_USER, password=DB_PASSWORD, dbname=DB_NAME
+    )
     try:
-        # ── DB fetch phase ─────────────────────────────────────────────────
-        t0 = time.perf_counter()
-        faces = db.query(Face).join(User).all()
-        t1 = time.perf_counter()
-        db_ms = (t1 - t0) * 1000
+        with conn.cursor() as cur:
+            vec_literal = "[" + ",".join(map(str, query_embedding.tolist())) + "]"
 
-        if not faces:
-            return {"db_time_ms": db_ms, "similarity_time_ms": 0.0, "n_faces": 0}
+            t0 = time.perf_counter()
+            cur.execute(
+                f"""
+                SELECT f.face_id, f.user_id,
+                       1 - (f.embedding <=> %s::vector) AS similarity
+                FROM faces f
+                JOIN users u ON f.user_id = u.user_id
+                ORDER BY f.embedding <=> %s::vector
+                LIMIT 1
+                """,
+                (vec_literal, vec_literal)
+            )
+            row = cur.fetchone()
+            t1 = time.perf_counter()
+            db_ms = (t1 - t0) * 1000
 
-        # ── Similarity loop phase ──────────────────────────────────────────
-        # This mirrors recognition.py exactly:
-        #   for face in faces:
-        #       stored = np.array(face.embedding, dtype=np.float32)
-        #       similarity = matcher.similarity(query_embedding, stored)
-        t2 = time.perf_counter()
-        best_similarity = -1.0
-        for face in faces:
-            stored = np.array(face.embedding, dtype=np.float32)
-            sim = matcher.similarity(query_embedding, stored)
-            if sim > best_similarity:
-                best_similarity = sim
-        t3 = time.perf_counter()
-        sim_ms = (t3 - t2) * 1000
+            if row is None:
+                return {"db_time_ms": db_ms, "similarity_time_ms": 0.0,
+                        "total_ms": db_ms, "n_faces": 0}
+
+            similarity = float(row[2])
+            matched = similarity >= matcher.threshold
 
         return {
             "db_time_ms": db_ms,
-            "similarity_time_ms": sim_ms,
-            "total_ms": db_ms + sim_ms,
-            "n_faces": len(faces),
+            "similarity_time_ms": 0.0,   # done in DB now
+            "total_ms": db_ms,
+            "n_faces": -1,               # not fetched, index handles it
         }
     finally:
-        db.close()
+        conn.close()
 
 
 def _measure_with_resources(

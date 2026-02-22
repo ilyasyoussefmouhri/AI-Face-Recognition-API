@@ -134,7 +134,7 @@ def seed_embeddings(n: int) -> float:
             cur.executemany(
                 """
                 INSERT INTO faces (face_id, user_id, embedding, detection_score)
-                VALUES (%s, %s, %s, %s)
+                VALUES (%s, %s, %s::vector, %s)
                 """,
                 [
                     (uuid.uuid4(), user_ids[i], embeddings[i], 0.99)

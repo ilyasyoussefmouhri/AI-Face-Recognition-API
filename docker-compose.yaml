@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:18-alpine
+    image: pgvector/pgvector:pg18
     container_name: face_recognition_db
     restart: unless-stopped
     environment:
@@ -9,7 +9,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-face_recognition}
       BENCHMARK_MODE: ${BENCHMARK_MODE:-false}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
     ports:
       - "5432:5432"
     healthcheck:

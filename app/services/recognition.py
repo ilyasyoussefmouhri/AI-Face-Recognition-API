@@ -16,9 +16,10 @@ import os
 import time
 
 from fastapi import UploadFile, HTTPException, Request
+import sqlalchemy as sa
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
-import numpy as np
 
 from app.db.models import User, Face
 from app.services.preprocessing import decode_image, load_image
@@ -63,52 +64,49 @@ def recognize_user(
 
         logger.info("Recognizing user from uploaded image...")
 
-        # ── DB fetch ──────────────────────────────────────────────────────
+        # ── Single DB query replaces full table scan + Python loop ────────
+        # <-> is pgvector's cosine distance operator.
+        # Cosine distance = 1 - cosine similarity, so ORDER BY ASC gives
+        # the most similar face first.
+        # We fetch only 1 row — the closest match.
         _t0 = time.perf_counter()
-        faces = db.query(Face).join(User).all()
+        result = (
+            db.query(Face, func.cast(
+                1 - Face.embedding.cosine_distance(query_embedding.tolist()),
+                sa.Float
+            ).label("similarity"))
+            .join(User)
+            .order_by(Face.embedding.cosine_distance(query_embedding.tolist()))
+            .first()
+        )
         _t1 = time.perf_counter()
 
         if BENCHMARK_MODE and request is not None:
             request.state.db_time_ms = (_t1 - _t0) * 1000
 
-        if not faces:
+        if result is None:
             logger.warning("No faces in database")
             return RecognizeResponse(user_id=None, similarity=0.0, match=False)
 
-        # ── Python similarity loop ────────────────────────────────────────
-        _t2 = time.perf_counter()
-        best_match = None
-        best_similarity = -1.0
 
-        for face in faces:
-            stored_embedding = np.array(face.embedding, dtype=np.float32)
-            similarity = matcher.similarity(query_embedding, stored_embedding)
-            if similarity > best_similarity:
-                best_similarity = similarity
-                best_match = face
-        _t3 = time.perf_counter()
 
-        if BENCHMARK_MODE and request is not None:
-            request.state.similarity_time_ms = (_t3 - _t2) * 1000
+        best_face, similarity = result
 
-        # ── Match decision ────────────────────────────────────────────────
-        if best_match and matcher.match(
-            query_embedding, np.array(best_match.embedding, dtype=np.float32)
-        ):
+        if similarity >= matcher.threshold:
             logger.info(
-                f"User recognized: {best_match.user.name} {best_match.user.surname} "
-                f"(similarity: {best_similarity:.3f})"
+                f"User recognized: {best_face.user.name} {best_face.user.surname} "
+                f"(similarity: {similarity:.3f})"
             )
             return RecognizeResponse(
                 match=True,
-                user_id=best_match.user_id,
-                similarity=min(1.0, max(-1.0, best_similarity)),
+                user_id=best_face.user_id,
+                similarity=min(1.0, max(-1.0, similarity)),
             )
         else:
-            logger.info(f"No match found (best similarity: {best_similarity:.3f})")
+            logger.info(f"No match found (best similarity: {similarity:.3f})")
             return RecognizeResponse(
                 user_id=None,
-                similarity=min(1.0, max(-1.0, best_similarity)),
+                similarity=min(1.0, max(-1.0, similarity)),
                 match=False,
             )
 
