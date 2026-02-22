@@ -8,6 +8,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       POSTGRES_DB: ${POSTGRES_DB:-face_recognition}
       BENCHMARK_MODE: ${BENCHMARK_MODE:-false}
+      RATE_LIMIT_ENABLED: ${RATE_LIMIT_ENABLED:-true}
     volumes:
       - postgres_data:/var/lib/postgresql
     ports:

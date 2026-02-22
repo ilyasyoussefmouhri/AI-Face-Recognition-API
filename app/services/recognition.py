@@ -37,7 +37,14 @@ def recognize_user(
     try:
         image_pil = decode_image(file.file)
         img_array = load_image(image_pil)
+        # ── Inference phase ───────────────────────────────────────────────────
+        _ti0 = time.perf_counter()
         embedding_obj = embedder.embed(img_array)
+        _ti1 = time.perf_counter()
+        if BENCHMARK_MODE and request is not None:
+            request.state.inference_time_ms = (_ti1 - _ti0) * 1000
+
+
         query_embedding = embedding_obj.embedding  # numpy array, L2-normalised
 
         logger.info("Recognizing user via pgvector HNSW index...")

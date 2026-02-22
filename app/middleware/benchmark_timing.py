@@ -47,12 +47,16 @@ class BenchmarkTimingMiddleware(BaseHTTPMiddleware):
         # Initialise state slots so recognition.py can write into them
         request.state.db_time_ms = None
         request.state.similarity_time_ms = None
+        request.state.inference_time_ms = None
 
         wall_start = time.perf_counter()
         response = await call_next(request)
         wall_ms = (time.perf_counter() - wall_start) * 1000
 
         response.headers["X-Total-Time-Ms"] = f"{wall_ms:.2f}"
+
+        if request.state.inference_time_ms is not None:
+            response.headers["X-Inference-Time-Ms"] = f"{request.state.inference_time_ms:.2f}"
 
         if request.state.db_time_ms is not None:
             response.headers["X-DB-Time-Ms"] = f"{request.state.db_time_ms:.2f}"

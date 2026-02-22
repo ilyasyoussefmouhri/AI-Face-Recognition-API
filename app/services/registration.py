@@ -62,6 +62,10 @@ def register_user(
         user = User(name=name, surname=surname, auth_user_id=auth_user_id)
         logger.info(f"User object created")
 
+        if len(embedding_obj.embedding) != 512:
+            logger.error(f"Invalid embedding dimension: {len(embedding_obj.embedding)}")
+            raise ValueError("Invalid embedding dimension")
+
         face = Face(
             user_id=user.user_id,
             embedding=embedding_obj.embedding.tolist(),

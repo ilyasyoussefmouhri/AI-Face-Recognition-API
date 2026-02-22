@@ -58,7 +58,7 @@ LOAD_RESULTS_FILE = os.path.join(RESULTS_DIR, "results_load.csv")
 # We stay well below that so the benchmark measures recognition latency,
 # not rate-limit rejection latency.
 # 30 iterations × ~2s gap each ≈ ~1 min → safe margin under 20/min.
-REQUEST_GAP_SECONDS = 2.5   # sleep between individual requests
+REQUEST_GAP_SECONDS = 0.5  # sleep between individual requests
 
 # ── Load test settings ───────────────────────────────────────────────────────
 # Keep concurrent users low enough to stay under 20 req/min per IP.
