@@ -1,73 +1,49 @@
 # Face Recognition API (Production-Oriented, API-First)
 
-> **Status:** In active development  
-> **Goal:** Build a production-grade facial recognition REST API using pretrained models, PostgreSQL, and modern Python backend practices.  
+> **Status:** Actively benchmarked and performance-profiled  
+> **Goal:** Build a production-grade facial recognition REST API using pretrained models, PostgreSQL + pgvector, and modern Python backend practices.  
 > **Target audience:** ML / Backend internship recruiters, engineers, and technical reviewers.
 
 ---
 
 ## 🚀 Project Motivation
 
-This project is **not a demo or tutorial exercise**.
+This project is not a demo or tutorial exercise.
 
 It is intentionally designed to:
-- Mirror **real-world ML backend systems**
-- Use **industry-relevant technologies**
-- Demonstrate **engineering judgment and trade-offs**
-- Prioritize **system design over model training**
 
-The goal is to showcase my ability to build, reason about, and evolve an applied computer vision system under realistic constraints — first as a barebones ML API, now as a secure, authenticated service that can survive real traffic.
+- Mirror real-world ML backend systems
+- Use industry-relevant technologies
+- Demonstrate engineering judgment, trade-offs, and performance reasoning
+- Prioritize system design and scaling over model training
+
+The early versions proved functionality. The current stage proves scalability, bottleneck isolation, and architectural maturity.
+
+This project now includes:
+
+- Vector-indexed similarity search
+- Structured multi-layer benchmarking
+- Concurrency analysis
+- Worker scaling experiments
+- CPU bottleneck isolation
+
+It has moved from "it works" to "it scales — and we know why."
 
 ---
 
 ## 🧠 Core Problem
 
 Build a REST API that can:
-1. **Register** a person by extracting and storing a facial embedding from an image
-2. **Recognize** a person by matching an input image against stored embeddings
-3. Be extensible to **real-time (webcam) recognition**
-4. Scale beyond naive in-memory matching
 
-All while using **pretrained models only** (no fine-tuning).
+- Register a person by extracting and storing a facial embedding from an image
+- Recognize a person by matching an input image against stored embeddings
+- Remain secure under authentication + rate limiting
+- Scale beyond naive in-memory similarity matching
+- Provide measurable, benchmarked performance characteristics
 
----
-
-## 🏗️ High-Level Architecture
-
-```
-Client (HTTP / Webcam)
-        |
-        v
--------------------------
- FastAPI Application
--------------------------
- |  API Layer
- |   - /register
- |   - /recognize
- |
- |  Services Layer
- |   - Image validation + decode (PIL)
- |   - NumPy/OpenCV conversion (BGR)
- |   - Registration logic
- |   - Recognition logic (in progress)
- |
- |  ML Layer (InsightFace)
- |   - FaceAnalysis (detect + align)
- |   - Embedding extraction (ArcFace)
- |
- |  Matching Layer
- |   - L2-normalized embeddings
- |   - Cosine similarity (dot product)
- |
- |  Persistence Layer
- |   - PostgreSQL
- |   - SQLAlchemy + Alembic
- |
--------------------------
-```
+All while using pretrained models only (no fine-tuning).
 
 ---
-
 ## 🔧 Technology Choices & Rationale
 
 ### FastAPI
@@ -133,7 +109,7 @@ Client (HTTP / Webcam)
 
 ---
 
-## 🔄 Current Pipeline (As Implemented)
+## 🔄 Current Pipeline (As Implemented, Phase 2) 
 
 - Validate image bytes by signature and size before decoding.
 - Decode via PIL, enforce allowed formats and max dimensions, and apply EXIF orientation.
@@ -145,36 +121,142 @@ Client (HTTP / Webcam)
 
 ---
 
-## 📦 Project Structure
+## 🏗️ High-Level Architecture (Current State)
+
+```
+Client (HTTP / Load Test)
+        |
+        v
+-------------------------
+ FastAPI Application
+-------------------------
+ |  API Layer
+ |   - /auth/*
+ |   - /register
+ |   - /recognize
+ |
+ |  Services Layer
+ |   - Image validation + decode
+ |   - Registration / Recognition pipelines
+ |   - Auth & deletion flows
+ |
+ |  ML Layer (InsightFace)
+ |   - FaceAnalysis (detect + align)
+ |   - Embedding extraction (ArcFace)
+ |   - ThreadPoolExecutor execution
+ |
+ |  Matching Layer
+ |   - Cosine similarity
+ |   - pgvector HNSW index (DB-side similarity)
+ |
+ |  Persistence Layer
+ |   - PostgreSQL 18
+ |   - pgvector (Vector(512))
+ |   - HNSW index (cosine_ops)
+ |
+-------------------------
+```
+
+Major evolution:
+
+- Similarity search now runs inside PostgreSQL
+- Inference runs in a thread pool
+- Concurrency behavior is benchmarked
+- Worker scaling behavior is measured
+
+---
+
+## 🔧 Major Architectural Evolution
+
+### Phase 2 → Phase 4 Turning Point: pgvector Migration
+
+**Originally:**
+
+- Embeddings stored as `ARRAY(Float)`
+- Full table scan
+- Python cosine loop
+- O(N) scaling
+
+At 10,000 rows: ~4,600ms per request (DB + similarity), 17MB transferred to Python per call.
+
+**Now:**
+
+- `Vector(512)` column
+- HNSW index (m=16, ef_construction=64)
+- Cosine similarity computed inside PostgreSQL
+
+**Result:** 241× speedup at 5,000 rows, DB latency flat at 2–8ms, no embedding transfer to Python, dataset size irrelevant up to 10k.
+
+The database bottleneck is now solved.
+
+---
+
+## 📊 Performance Benchmarking
+
+This project includes structured benchmarking across three layers:
+
+- **Layer 1 — Direct DB:** pre/post pgvector comparison, O(N) → flat scaling
+- **Layer 2 — Sequential HTTP:** full pipeline breakdown, inference vs DB cost
+- **Layer 3 — Concurrent HTTP:** queuing behaviour, 1 vs 4 workers, throughput characterization
+
+For full results, data tables, and analysis see **[PERFORMANCE.md](./PERFORMANCE.md)**.
+
+### Current System Cost Breakdown
+
+| Component | Time | % of Total |
+|---|---|---|
+| InsightFace inference (CPU) | ~1,300ms | ~99.8% |
+| pgvector query | 2–8ms | ~0.2% |
+| JWT validation | <1ms | negligible |
+
+The database layer is no longer a scaling concern. Inference is the only true bottleneck.
+
+---
+
+## 🧠 Concurrency Architecture Improvements
+
+Two important changes were introduced:
+
+### 1. ThreadPoolExecutor
+
+Inference now runs via `asyncio.run_in_executor`.
+
+- Prevents blocking the FastAPI event loop
+- Allows concurrent request acceptance
+- Enables realistic async load behavior
+
+Without this, concurrency testing would be meaningless.
+
+### 2. Multi-Worker Uvicorn Deployment
+
+Using `uvicorn app.main:app --workers 4`. Each worker is a separate process with its own GIL and its own model instance.
+
+**Trade-off:** N× model memory, improved throughput, slight single-user latency regression due to CPU contention.
+
+---
+
+## 📦 Updated Project Structure
 
 ```
 app/
-├── api/
+├── api/routes/
 ├── services/
 ├── models/
 ├── db/
 ├── core/
 ├── schemas/
-└── utils/
+├── utils/
+└── main.py
 ```
 
-I started with a flatter layout, but the codebase now has clearer ownership boundaries (and an explicit auth layer):
+Additional:
 
-- `services/` owns validation + decoding, and now also authentication, authorization, and deletion flows.
-- `models/` isolates ML inference (`InsightFaceEmbedder`) and matching (`InsightFaceMatcher`), and the match threshold lives there (default 0.7) so it stays configurable in one place.
-- `core/` centralizes config, device selection (`Device`), logging, shared errors, the rate limiter, and security helpers (bcrypt + JWT).
-- `db/` + `schemas/` define persistence and API contracts; `utils/` stays intentionally thin to avoid a grab-bag.
+- `tests/` includes embedder + recognition tests
+- Benchmark scripts exist under dedicated benchmark directory
+- Coverage reports generated
+- Alembic migrations track schema evolution
 
----
-
-## 🧱 Major Problems & Turning Points
-
-- I started with manual resizing/cropping logic, which quickly became fragile across different inputs.
-- The turning point was realizing FaceAnalysis already performs detection + alignment with its own preprocessing, so manual steps were hurting consistency.
-- I nearly normalized embeddings twice (once at extraction, once before matching), which made similarity scores drift; normalization is now a single, explicit step.
-- Threshold selection turned out to be empirical rather than theoretical, so it lives in the matcher for careful tuning.
-- To avoid context rot, I froze these choices into clear boundaries (validation/decoding vs inference vs matching) and stopped moving them around.
-- The API hardening phase forced domain separation (`AuthUser` vs `User`), explicit cascade behavior, and bearer tokens with expirations — small decisions that collectively reduce blast radius.
+Separation remains clean: API layer thin, services contain orchestration, ML models isolated, matching isolated, DB layer explicit, security centralized.
 
 ---
 
@@ -187,62 +269,65 @@ I started with a flatter layout, but the codebase now has clearer ownership boun
 
 ---
 
-## 🔐 API Hardening Milestone (Phase 3)
+## 🔐 Security & Production Hardening (Completed)
 
-What changed: the API grew up. Auth lives in `app/api/routes/auth.py` with bcrypt-hashed credentials, HS256 JWTs, and per-route rate limits. The domain is split: `AuthUser` accounts own exactly one biometric `User`, and cascade deletes ensure credentials and embeddings cannot drift apart. Admins can prune biometric users, while anyone can self-delete; all destructive paths are dependency-guarded (`get_current_user`, `get_current_admin`).
+- ✔ JWT authentication
+- ✔ bcrypt password hashing
+- ✔ Role-based access control
+- ✔ Rate limiting per route
+- ✔ Cascade-safe deletion
+- ✔ Environment-based configuration
+- ✔ Structured logging
 
-Why JWT (and not a full OAuth2 server): the system is a single API, not an auth provider. Stateless JWTs keep deployment light, let us encode roles and expirations, and align with FastAPI’s bearer tooling without running extra infrastructure.
-
-Why rate limiting: `/recognize` and `/register` are CPU-heavy and attractive for brute force; SlowAPI enforces route-specific ceilings so auth and inference can be tuned independently.
-
-Why domain separation: credentials are mutable; biometric embeddings are not. Keeping them in separate tables with a one-to-one relationship lets us rotate passwords, disable accounts, or cascade-delete safely without touching embeddings by accident.
-
-## 🛣️ Roadmap
-
-- [x] API skeleton & PostgreSQL
-- [x] Image ingestion & validation
-- [x] Face detection + alignment (InsightFace)
-- [x] Embeddings & storage
-- [x] Recognition endpoint + matching integration
-- [x] API hardening (auth, JWT, RBAC, rate limits, cascade-safe deletes)
-- [ ] Scaling with pgvector + indexed similarity search
-- [ ] Advanced optimization
+The API is now secure enough for real deployment scenarios.
 
 ---
 
-> This README will evolve as the project matures.
+## 🛣️ Updated Roadmap Alignment
+
+### Phase 4 – Vector Storage & Scaling
+
+- ✔ pgvector integration
+- ✔ HNSW index
+- ✔ DB-side similarity
+- ✔ Performance benchmarking
+
+### Next Steps
+
+- Threshold tuning with validation data
+- End-to-end tests (auth + register + recognize + delete)
+- GPU inference benchmarking
+- Model comparison (buffalo_l vs buffalo_sc)
+- Production observability improvements
+- Memory profiling under multi-worker load
 
 ---
 
-## Current Status / Progress
-- Secure FastAPI application with JWT auth, per-route rate limits, and RBAC-protected registration/recognition/deletion.
-- SQLAlchemy models separate `AuthUser` (credentials/roles) from biometric `User` + `Face`; cascade deletion is intentional.
-- Image validation and decoding are implemented (signature checks, size limits, PIL decode with EXIF correction).
-- Preprocessing converts to BGR uint8; InsightFace FaceAnalysis handles detection, alignment, and embedding extraction.
-- Embeddings are L2-normalized and stored during registration; detection scores are persisted alongside them.
-- `/recognize` runs end-to-end: embed, cosine-match via `InsightFaceMatcher`, return best identity behind auth.
-- Tests cover the embedder and service layers; broader end-to-end auth + inference tests are next.
-- Ready to enter the pgvector scaling phase after validating thresholds under load.
+## 🧠 What I Learned So Far (~40+ hours)
 
-## Why These Technologies (Concise)
-- **FastAPI**: Clear dependency injection and automatic OpenAPI docs; good for production REST services.
-- **PostgreSQL 18**: Stable relational store with future headroom for vector search extensions.
-- **SQLAlchemy + Alembic**: Explicit models plus versioned migrations for safe schema evolution.
-- **InsightFace (FaceAnalysis + ArcFace)**: Pretrained, production-grade detection + alignment + embeddings without fine-tuning.
-- **Cosine similarity (dot product)**: Works with normalized embeddings and keeps thresholding transparent.
-- **Pydantic Settings + .env**: Environment-driven config to keep secrets out of code and support per-environment overrides.
-- **JWT + bcrypt + SlowAPI**: Lightweight auth with hashed credentials, expiring tokens, and abuse resistance without standing up extra services.
+- Scaling problems rarely sit where you expect.
+- Optimizing the wrong layer wastes time — benchmarking first prevents that.
+- Vector databases eliminate O(N) similarity cost entirely.
+- CPU-bound ML inference behaves very differently under concurrency.
+- Async does not magically create parallelism.
+- GIL-bound workloads require multi-process scaling or GPU.
+- Production ML systems are 80% systems engineering, 20% model usage.
+- Worker count trades memory for throughput.
+- Profiling before optimization is non-negotiable.
 
-## What I Learned So Far (≈25 hours)
-- I learned that generic preprocessing habits (resize, normalize) don't transfer; model-specific preprocessing matters more than my own tricks.
-- Respecting the model's training assumptions (BGR uint8 input, alignment) is more reliable than custom pipelines.
-- Embeddings are descriptors, not identities; identity decisions live in matching logic and thresholds.
-- Normalization and distance metrics are not a detail; L2 + cosine define similarity behavior and can be broken by double-normalization.
-- Clear system boundaries (validation/decoding vs inference vs matching) are what keep ML-backed APIs maintainable.
-- Keeping knobs explicit (size limits, device selection, centralized thresholds) prevents hidden drift.
+---
 
-## Next Steps (from roadmap_and_milestones.md)
-- Move embeddings to `pgvector` and add an index (IVFFLAT/HNSW) to replace the linear scan.
-- Expose and tune match thresholds via settings with validation data.
-- Add end-to-end tests that cover auth + registration + recognition + deletion.
-- Harden observability around auth failures and rate-limit breaches before load testing.
+## 🎯 Current Status
+
+This is no longer just a face recognition API. It is now:
+
+- A production-oriented ML backend
+- With indexed vector similarity search
+- With security and lifecycle management
+- With structured performance benchmarking
+- With concurrency characterization
+- With real scaling trade-offs documented
+
+The database bottleneck is solved. The system is ready for either GPU acceleration, horizontal scaling, or model optimization.
+
+This README will continue evolving as the system approaches GPU acceleration and deployment-grade readiness.
