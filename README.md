@@ -9,7 +9,7 @@
 
 ## 🚀 Executive Summary
 
-This project is a **production-oriented facial recognition backend**
+This project is a **production-oriented Face-Based Identity Verification Microservice backend**
 built with FastAPI, PostgreSQL 18, and pgvector.
 
 It demonstrates:
@@ -20,10 +20,11 @@ It demonstrates:
 -   Concurrency and worker scaling analysis
 -   Secure authentication (JWT + RBAC)
 -   Clear architectural boundaries
-
-The system evolved from a naive O(N) similarity scan to a
+---
+- The system evolved from a naive O(N) similarity scan to a
 vector-indexed, benchmarked ML backend with documented bottlenecks and
 scaling characteristics.
+- This is not an end-user product. It’s a biometric authentication microservice designed to be embedded inside larger systems like access control, KYC onboarding, or passwordless login systems. The goal of this project was systems engineering and performance characterization, not product-market fit.
 
 ------------------------------------------------------------------------
 
@@ -124,12 +125,42 @@ worker) - Sub-linear scaling due to shared CPU cores
 
 ------------------------------------------------------------------------
 
-## 🛣️ Next Steps
+# 🛣️ Next Steps: Future Improvements
 
--   GPU inference benchmarking
--   Threshold tuning with validation data
--   Full end-to-end integration tests
--   Observability improvements
+While the core system is functionally complete and performance-characterized, the following extensions have been identified to transition the project from a "production-ready prototype" toward a **production deployment candidate**.
+
+---
+
+### 1. Observability & Monitoring
+* **Prometheus Metrics:** Add an endpoint to track request count, latency, inference time, and DB query duration.
+* **Structured Tracing:** Implement request IDs for end-to-end tracing.
+* **Alerting:** Set thresholds for abnormal latency or error rates.
+
+### 2. Biometric Threshold Calibration
+Build a validation harness to empirically tune the similarity threshold rather than relying on fixed defaults. This includes computing:
+* **False Accept Rate (FAR)**
+* **False Reject Rate (FRR)**
+* **ROC Curve Analysis:** Documenting decision boundary trade-offs for real-world reliability.
+
+
+
+### 3. Sustained Load Testing
+* **Tooling:** Replace ad-hoc concurrency testing with **Locust** or **k6**.
+* **Ramp-up Testing:** Shift to ramp-up RPS testing instead of burst-only benchmarking.
+* **Latency Percentiles:** Observe system behavior and graceful degradation under sustained saturation.
+
+### 4. Hardware-Aware Scaling
+* **Device Switching:** Add configurable CPU/GPU switching.
+* **Model Benchmarking:** Compare performance and accuracy trade-offs between `buffalo_l` and `buffalo_sc` models.
+
+### 5. Backpressure & Graceful Degradation
+* **Concurrency Semaphore:** Implement a semaphore for inference to prevent resource exhaustion.
+* **Saturation Handling:** Return `429 Too Many Requests` when the system is at capacity.
+* **Queue Management:** Prevent unbounded request queue growth under high load.
+
+### 6. CI/CD Improvements
+* **Test Coverage:** Expand automated unit and integration tests.
+* **Static Analysis:** Add **mypy** for type checks and enforce linting/formatting in the pipeline.
 
 ------------------------------------------------------------------------
 
